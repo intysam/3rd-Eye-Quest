@@ -1,1 +1,152 @@
-<h1>Player Assist Guide</h1><p>Here is what to probe for...</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3rd Eye Quest - Assist Guide</title>
+    <style>
+        /* Modern, Dark Theme */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #1a1a2e; /* Deep dark blue */
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #4a4e69;
+            margin-bottom: 20px;
+        }
+
+        h1 { color: #9d8189; margin: 0; font-size: 1.8rem; }
+        p.subtitle { font-style: italic; color: #8d99ae; font-size: 0.9rem; }
+
+        /* The Accordion Buttons */
+        .accordion {
+            background-color: #2b2d42;
+            color: #edf2f4;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: 0.4s;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .active, .accordion:hover {
+            background-color: #4a4e69;
+        }
+
+        .accordion:after {
+            content: '\002B'; /* Plus sign */
+            font-weight: bold;
+        }
+
+        .active:after {
+            content: "\2212"; /* Minus sign */
+        }
+
+        /* The Content Panel */
+        .panel {
+            padding: 0 15px;
+            background-color: #1a1a2e;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            margin-bottom: 15px;
+            border-left: 2px solid #9d8189;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #8d99ae;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #9d8189;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>3rd Eye Quest</h1>
+    <p class="subtitle">Digital Assist Guide</p>
+</header>
+
+<button class="accordion">Probing Basics</button>
+<div class="panel">
+  <p>When it is your turn to probe, remember:</p>
+  <ul>
+    <li>Choose one player to target.</li>
+    <li>Ask a question based on your current Quest card.</li>
+    <li>Watch for physical cues or hesitations.</li>
+  </ul>
+</div>
+
+<button class="accordion">What to Probe For: Level 1</button>
+<div class="panel">
+  <ul>
+    <li><strong>Visual Cues:</strong> Eye contact shifts or blinking patterns.</li>
+    <li><strong>Verbal Cues:</strong> Changes in pitch or "filler" words (um, ah).</li>
+    <li><strong>Physical:</strong> Touching the face or adjusting clothes.</li>
+  </ul>
+</div>
+
+<button class="accordion">What to Probe For: Level 2</button>
+<div class="panel">
+  <p>Look for micro-expressions that contradict their words:</p>
+  <ul>
+    <li>Quick scoffs or lip biting.</li>
+    <li>Tension in the jaw or shoulders.</li>
+  </ul>
+</div>
+
+<footer>
+    <p>Loving the Quest?</p>
+    <a href="index.html" class="cta-button">Back to Main Site</a>
+    <p>&copy; 2026 3rd Eye Quest</p>
+</footer>
+
+<script>
+// Script to handle the opening/closing of sections
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
+</html>
