@@ -53,7 +53,6 @@
             font-style: italic;
         }
 
-        /* BUTTON STYLING */
         .btn-primary {
             display: inline-block;
             background-color: transparent;
@@ -73,4 +72,126 @@
         .btn-primary:hover {
             background-color: var(--quest-pink);
             color: var(--quest-dark);
-            box-shadow: 0 0 15px rgba(157, 129, 137,
+            box-shadow: 0 0 15px rgba(157, 129, 137, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .features {
+            padding: 60px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--quest-card);
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            border-bottom: 4px solid var(--quest-pink);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { color: var(--quest-pink); margin-top: 0; }
+
+        .cta-section {
+            padding: 80px 20px;
+            background-color: rgba(157, 129, 137, 0.1);
+            border-top: 1px solid var(--quest-pink);
+        }
+
+        #mc_embed_signup {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #mce-EMAIL {
+            width: 100%;
+            padding: 15px;
+            border-radius: 30px;
+            border: 2px solid var(--quest-pink);
+            background: var(--quest-dark);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        #mc-embedded-subscribe {
+            background-color: var(--quest-pink) !important;
+            color: white !important;
+            padding: 15px 40px !important;
+            border-radius: 30px !important;
+            font-weight: bold !important;
+            border: none !important;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        #mc-embedded-subscribe:hover {
+            background-color: #b598a0 !important;
+            transform: scale(1.02);
+        }
+
+        .indicates-required, .asterisk, .refferal_badge { display: none !important; }
+
+        footer {
+            padding: 50px;
+            font-size: 0.8rem;
+            color: #6d7687;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img">
+        <h1>3rd Eye Quest</h1>
+        <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
+        <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <h3>Read the Room</h3>
+            <p>A game of high-stakes social deduction where your third eye is your greatest weapon.</p>
+        </div>
+        <div class="card">
+            <h3>Master the Probe</h3>
+            <p>Ask the right questions to uncover hidden motives and protect your own secrets.</p>
+        </div>
+        <div class="card">
+            <h3>Stunning Art</h3>
+            <p>Every card is designed to evoke mystery, spirituality, and deep focus.</p>
+        </div>
+    </section>
+
+    <section id="signup" class="cta-section">
+        <h2 style="color: var(--quest-pink);">Join the Waitlist</h2>
+        <p>Be the first to know when 3rd Eye Quest launches.</p>
+        <div id="mc_embed_signup">
+            <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007ad8e3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
+                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your best email address" required value="">
+                <div id="mce-responses" style="margin-bottom: 10px;">
+                    <div class="response" id="mce-error-response" style="display:none; color: #ff6b6b;"></div>
+                    <div class="response" id="mce-success-response" style="display:none; color: #51cf66;"></div>
+                </div>
+                <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                    <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
+                </div>
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Enter the Quest">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 3rd Eye Quest. All rights reserved.
+    </footer>
+
+</body>
+</html>
