@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<<link rel="icon" type="image/x-icon" href="favicon.ico">d>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a00d9ac7897706f6ee8f12932/8eecba87921f2bde24de07b3b.js");</script>
-    
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3rd Eye Quest | The Ultimate Card Game of Intuition</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a00d9ac7897706f6ee8f12932/8eecba87921f2bde24de07b3b.js");</script>
+    
     <style>
         :root {
             --quest-pink: #9d8189;
@@ -24,14 +27,21 @@
         }
 
         .hero {
-            padding: 100px 20px;
+            padding: 80px 20px;
             background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
+        }
+
+        .logo-img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
         }
 
         h1 {
             font-size: 3.5rem;
             color: var(--quest-pink);
-            margin-bottom: 10px;
+            margin: 0 0 10px 0;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
@@ -63,7 +73,6 @@
         .card:hover { transform: translateY(-10px); }
         .card h3 { color: var(--quest-pink); margin-top: 0; }
 
-        /* SLEEK SIGNUP SECTION */
         .cta-section {
             padding: 80px 20px;
             background-color: rgba(157, 129, 137, 0.1);
@@ -75,7 +84,6 @@
             margin: 0 auto;
         }
 
-        /* Styling the Mailchimp Input Field */
         #mce-EMAIL {
             width: 100%;
             padding: 15px;
@@ -89,7 +97,6 @@
             box-sizing: border-box;
         }
 
-        /* Styling the Mailchimp Button */
         #mc-embedded-subscribe {
             background-color: var(--quest-pink) !important;
             color: white !important;
@@ -108,7 +115,7 @@
             transform: scale(1.02);
         }
 
-        .indicates-required, .asterisk, .refferal_badge { display: none !important; } /* Hide the clutter */
+        .indicates-required, .asterisk, .refferal_badge { display: none !important; }
 
         footer {
             padding: 50px;
@@ -120,6 +127,7 @@
 <body>
 
     <section class="hero">
+        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img">
         <h1>3rd Eye Quest</h1>
         <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
     </section>
