@@ -24,20 +24,42 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* NEW: PARTICLE CANVAS BACKGROUND */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         .hero {
+            position: relative;
             padding: 60px 20px;
             background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
+            overflow: hidden;
+        }
+
+        /* ADD-ON: PULSING LOGO */
+        @keyframes pulse {
+            0% { filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(157, 129, 137, 0.6)); transform: scale(1.02); }
+            100% { filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3)); transform: scale(1); }
         }
 
         .logo-img {
             width: 120px;
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
+            animation: pulse 4s infinite ease-in-out;
         }
 
+        /* 3D BOX ANIMATION */
         .box-container {
             perspective: 1000px;
             display: inline-block;
@@ -85,6 +107,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .btn-primary:hover {
@@ -98,12 +122,21 @@
             background-color: var(--quest-card);
         }
 
+        /* ADD-ON: ANIMATED REVEAL STEPS */
         .step {
             max-width: 700px;
             margin: 0 auto 40px auto;
             text-align: left;
             border-left: 3px solid var(--quest-pink);
             padding-left: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .step.reveal {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .step h3 { color: var(--quest-pink); margin-top: 0; }
@@ -144,6 +177,7 @@
 <body>
 
     <section class="hero">
+        <canvas id="hero-canvas"></canvas>
         <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img">
         <div class="box-container">
             <img src="box-front.png" alt="3rd Eye Quest Game Box" class="rotating-box">
@@ -177,16 +211,4 @@
         <p>Launching February 2026. Be the first to enter the quest.</p>
         
         <div id="mc_embed_signup">
-            <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007ad8e3f0" method="post" id="mc-embedded-subscribe-form" novalidate>
-                <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Your email address" required>
-                <input type="submit" value="Enter the Quest" id="mc-embedded-subscribe">
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2026 3rd Eye Quest. Created by Intysam Goldsmith.
-    </footer>
-
-</body>
-</html>
+            <form action="
