@@ -38,7 +38,6 @@
             filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
         }
 
-        /* 3D BOX ANIMATION */
         .box-container {
             perspective: 1000px;
             display: inline-block;
@@ -49,4 +48,145 @@
             width: 280px;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: rotateY(-10deg) rotateX(5deg);
+        }
+
+        .box-container:hover .rotating-box {
+            transform: rotateY(10deg) rotateX(-5deg) scale(1.05);
+            box-shadow: 0 30px 60px rgba(157, 129, 137, 0.4);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--quest-pink);
+            margin: 10px 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #8d99ae;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--quest-pink);
+            border: 2px solid var(--quest-pink);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--quest-pink);
+            color: var(--quest-dark);
+            box-shadow: 0 0 15px rgba(157, 129, 137, 0.4);
+        }
+
+        .how-to-play {
+            padding: 80px 20px;
+            background-color: var(--quest-card);
+        }
+
+        .step {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            text-align: left;
+            border-left: 3px solid var(--quest-pink);
+            padding-left: 25px;
+        }
+
+        .step h3 { color: var(--quest-pink); margin-top: 0; }
+
+        .cta-section {
+            padding: 80px 20px;
+            background-color: rgba(157, 129, 137, 0.1);
+            border-top: 1px solid var(--quest-pink);
+        }
+
+        #mce-EMAIL {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 30px;
+            border: 2px solid var(--quest-pink);
+            background: var(--quest-dark);
+            color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        #mc-embedded-subscribe {
+            background-color: var(--quest-pink) !important;
+            color: white !important;
+            padding: 15px 40px !important;
+            border-radius: 30px !important;
+            font-weight: bold !important;
+            border: none !important;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        footer { padding: 50px; font-size: 0.8rem; color: #6d7687; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img">
+        <div class="box-container">
+            <img src="box-front.png" alt="3rd Eye Quest Game Box" class="rotating-box">
+        </div>
+        <h1>3rd Eye Quest</h1>
+        <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
+        <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
+    </section>
+
+    <section class="how-to-play">
+        <h2 style="color: var(--quest-pink); text-transform: uppercase; margin-bottom: 50px;">How to Play</h2>
+        
+        <div class="step">
+            <h3>1. The Judge Selects a Target</h3>
+            <p>One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks. They keep the image hidden from others.</p>
+        </div>
+
+        <div class="step">
+            <h3>2. Viewers Sense the Unseen</h3>
+            <p>Viewers close their eyes and describe intuitive impressions: textures, shapes, and emotions. Remember the golden rule: <strong>Describe, don't define</strong>.</p>
+        </div>
+
+        <div class="step">
+            <h3>3. Reveal and Reward</h3>
+            <p>The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card.</p>
+        </div>
+    </section>
+
+    <section id="signup" class="cta-section">
+        <h2 style="color: var(--quest-pink);">Join the Waitlist</h2>
+        <p>Launching February 2026. Be the first to enter the quest.</p>
+        
+        <div id="mc_embed_signup">
+            <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007ad8e3f0" method="post" id="mc-embedded-subscribe-form" novalidate>
+                <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Your email address" required>
+                <input type="submit" value="Enter the Quest" id="mc-embedded-subscribe">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 3rd Eye Quest. Created by Intysam Goldsmith.
+    </footer>
+
+</body>
+</html>
