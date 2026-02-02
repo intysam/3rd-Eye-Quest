@@ -31,7 +31,7 @@
         }
 
         .logo-img {
-            width: 120px;
+            width: 100px;
             height: auto;
             margin-bottom: 15px;
             filter: drop-shadow(0 0 8px rgba(157, 129, 137, 0.4));
@@ -42,6 +42,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 0;
+            font-size: 1.8rem;
         }
 
         .container {
@@ -50,19 +51,41 @@
             padding: 20px;
         }
 
+        .btn-secondary {
+            display: inline-block;
+            color: #8d99ae;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            color: var(--quest-pink);
+        }
+
+        .golden-rule {
+            text-align: center;
+            font-style: italic;
+            color: #8d99ae;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(157, 129, 137, 0.2);
+            padding-bottom: 20px;
+        }
+
         .guide-section {
             background: var(--quest-card);
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 25px;
             border-left: 5px solid var(--quest-pink);
-            text-align: left;
         }
 
         h2 {
             color: var(--quest-pink);
             margin-top: 0;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            text-transform: uppercase;
         }
 
         ul {
@@ -71,27 +94,10 @@
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .golden-rule {
-            text-align: center;
-            font-style: italic;
-            color: #8d99ae;
-            margin-bottom: 30px;
-        }
-
-        /* BACK BUTTON STYLING */
-        .btn-secondary {
-            display: inline-block;
-            color: #8d99ae;
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .btn-secondary:hover {
+        li strong {
             color: var(--quest-pink);
         }
 
@@ -111,33 +117,37 @@
     </header>
 
     <div class="container">
-        <a href="index.html" class="btn-secondary">← Back to Home</a>
+        <a href="index.html" class="btn-secondary">← Back to Main Site</a>
 
         <p class="golden-rule">"Describe, don’t define. Trust your first signal."</p>
 
         <section class="guide-section">
             <h2>Landscape & Environment</h2>
             <ul>
-                <li><strong>Terrain:</strong> Flat, jagged, liquid, mountainous?</li>
-                <li><strong>Origin:</strong> Natural, man-made, or biological?</li>
-                <li><strong>Atmosphere:</strong> Clear, hazy, luminous, or shadowy?</li>
+                <li><strong>Terrain:</strong> Is it flat, rocky, uneven, or elevated?</li>
+                <li><strong>Vegetation:</strong> Does it feel lush, sparse, or barren?</li>
+                <li><strong>Water:</strong> Is it still, flowing, or frozen?</li>
+                <li><strong>Light:</strong> Is it bright, dim, or glowing?</li>
             </ul>
         </section>
 
         <section class="guide-section">
             <h2>Sensory Signals</h2>
             <ul>
-                <li><strong>Colors:</strong> Vibrant, muted, metallic, or translucent?</li>
-                <li><strong>Energy:</strong> Kinetic, stagnant, peaceful, or chaotic?</li>
-                <li><strong>Textures:</strong> Smooth, gritty, porous, or sharp?</li>
+                <li><strong>Temperature:</strong> Does it feel warm, cold, or shifting?</li>
+                <li><strong>Texture:</strong> Is it smooth, rough, metallic, or soft?</li>
+                <li><strong>Energy:</strong> Does it feel still, active, or chaotic?</li>
+                <li><strong>Mood:</strong> Is it peaceful, mysterious, or awe-inspiring?</li>
             </ul>
         </section>
 
         <section class="guide-section">
-            <h2>Forms & Subjects</h2>
+            <h2>Animal & Life</h2>
             <ul>
-                <li><strong>Animals:</strong> Predatory, graceful, swarm, or solitary?</li>
-                <li><strong>Objects:</strong> Technological, ancient, heavy, or fragile?</li>
+                <li><strong>Energy:</strong> Is it calm, fierce, cautious, or playful?</li>
+                <li><strong>Size:</strong> Small, medium, or massive?</li>
+                <li><strong>Texture:</strong> Fur, feathers, scales, or smooth skin?</li>
+                <li><strong>Movement:</strong> Crawling, flying, swimming, or still?</li>
             </ul>
         </section>
     </div>
