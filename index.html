@@ -27,180 +27,26 @@
         }
 
         .hero {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
         }
 
         .logo-img {
-            width: 150px;
+            width: 120px;
             height: auto;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
         }
 
-        h1 {
-            font-size: 3.5rem;
-            color: var(--quest-pink);
-            margin: 0 0 10px 0;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: #8d99ae;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .btn-primary {
+        /* 3D BOX ANIMATION */
+        .box-container {
+            perspective: 1000px;
             display: inline-block;
-            background-color: transparent;
-            color: var(--quest-pink);
-            border: 2px solid var(--quest-pink);
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            margin: 30px 0;
         }
 
-        .btn-primary:hover {
-            background-color: var(--quest-pink);
-            color: var(--quest-dark);
-            box-shadow: 0 0 15px rgba(157, 129, 137, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .features {
-            padding: 60px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--quest-card);
-            padding: 30px;
-            border-radius: 15px;
-            width: 300px;
-            border-bottom: 4px solid var(--quest-pink);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover { transform: translateY(-10px); }
-        .card h3 { color: var(--quest-pink); margin-top: 0; }
-
-        .cta-section {
-            padding: 80px 20px;
-            background-color: rgba(157, 129, 137, 0.1);
-            border-top: 1px solid var(--quest-pink);
-        }
-
-        #mc_embed_signup {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        #mce-EMAIL {
-            width: 100%;
-            padding: 15px;
-            border-radius: 30px;
-            border: 2px solid var(--quest-pink);
-            background: var(--quest-dark);
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        #mc-embedded-subscribe {
-            background-color: var(--quest-pink) !important;
-            color: white !important;
-            padding: 15px 40px !important;
-            border-radius: 30px !important;
-            font-weight: bold !important;
-            border: none !important;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        #mc-embedded-subscribe:hover {
-            background-color: #b598a0 !important;
-            transform: scale(1.02);
-        }
-
-        .indicates-required, .asterisk, .refferal_badge { display: none !important; }
-
-        footer {
-            padding: 50px;
-            font-size: 0.8rem;
-            color: #6d7687;
-        }
-    </style>
-</head>
-<body>
-
-    <section class="hero">
-        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img">
-        <h1>3rd Eye Quest</h1>
-        <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
-        <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-    </section>
-
-    <section class="features">
-       <section class="how-to-play" style="padding: 80px 20px; background-color: var(--quest-card); color: var(--quest-text);">
-    <h2 style="color: var(--quest-pink); font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase;">How to Play</h2>
-    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
-        
-        <div class="step" style="margin-bottom: 30px;">
-            <h3 style="color: var(--quest-pink);">1. The Judge Selects a Target</h3>
-            <p>One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks[cite: 244, 248, 249]. They keep the image hidden from the other players[cite: 250].</p>
-        </div>
-
-        <div class="step" style="margin-bottom: 30px;">
-            <h3 style="color: var(--quest-pink);">2. Viewers Sense the Unseen</h3>
-            <p>Viewers close their eyes, breathe deeply, and record their intuitive impressions[cite: 251, 254, 255]. Use the <strong>Assist Cards</strong> or our <a href="assist.html" style="color: var(--quest-pink); text-decoration: underline;">Digital Assist Guide</a> to probe for textures, emotions, and shapes[cite: 245, 256].</p>
-        </div>
-
-        <div class="step" style="margin-bottom: 30px;">
-            <h3 style="color: var(--quest-pink);">3. Reveal and Reward</h3>
-            <p>The Judge reveals the card[cite: 260]. The player whose description most accurately matches the target wins the round and keeps the card[cite: 241, 261]. The most intuitive player is crowned the Master Viewer[cite: 235, 242]!</p>
-        </div>
-
-        <p style="text-align: center; font-style: italic; color: #8d99ae; margin-top: 40px;">"Describe, don't define. Trust your first signal." [cite: 192, 193]</p>
-    </div>
-</section>
-
-    <section id="signup" class="cta-section">
-        <h2 style="color: var(--quest-pink);">Join the Waitlist</h2>
-        <p>Be the first to know when 3rd Eye Quest launches.</p>
-        <div id="mc_embed_signup">
-            <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007ad8e3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
-                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your best email address" required value="">
-                <div id="mce-responses" style="margin-bottom: 10px;">
-                    <div class="response" id="mce-error-response" style="display:none; color: #ff6b6b;"></div>
-                    <div class="response" id="mce-success-response" style="display:none; color: #51cf66;"></div>
-                </div>
-                <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                    <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
-                </div>
-                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Enter the Quest">
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2026 3rd Eye Quest. All rights reserved.
-    </footer>
-
-</body>
-</html>
+        .rotating-box {
+            width: 280px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0
