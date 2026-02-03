@@ -7,11 +7,10 @@
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <!-- Social preview (nice for sharing) -->
+  <meta name="description" content="3rd Eye Quest is a premium intuition card game designed to sharpen perception, signal-reading, and playful truth-seeking." />
   <meta property="og:title" content="3rd Eye Quest | The Ultimate Card Game of Intuition" />
   <meta property="og:description" content="Unlock your intuition. Probe the truth. Master the quest." />
   <meta property="og:image" content="box-front.png" />
-  <meta name="description" content="3rd Eye Quest is a premium intuition card game designed to sharpen perception, signal-reading, and playful truth-seeking." />
 
   <style>
     :root {
@@ -19,7 +18,10 @@
       --quest-dark: #1a1a2e;
       --quest-card: #2b2d42;
       --quest-text: #edf2f4;
+      --quest-gold: #c4a484;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -31,71 +33,104 @@
       overflow-x: hidden;
     }
 
+    /* HERO */
     .hero {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 80px 20px;
-      background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
-      position: relative;
-      isolation: isolate; /* keeps canvas layering clean */
+      padding: 84px 20px 70px;
+      background: radial-gradient(1200px 700px at 50% 20%, rgba(157,129,137,0.25) 0%, rgba(26,26,46,0.0) 55%),
+                  linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
+      isolation: isolate; /* keeps layered effects clean */
+      overflow: hidden;
     }
 
-    #hero-canvas {
+    /* Galaxy "nebula" overlay (CSS) */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(600px 420px at 20% 35%, rgba(196,164,132,0.14) 0%, rgba(196,164,132,0.00) 60%),
+        radial-gradient(500px 380px at 80% 30%, rgba(157,129,137,0.18) 0%, rgba(157,129,137,0.00) 62%),
+        radial-gradient(650px 520px at 55% 70%, rgba(120,90,255,0.10) 0%, rgba(120,90,255,0.00) 65%);
+      filter: blur(18px);
+      opacity: 0.9;
+      z-index: 0;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    /* Starfield canvas */
+    #galaxy-canvas {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       z-index: 0;
-      opacity: 0.3;
+      opacity: 0.8;
       pointer-events: none;
+    }
+
+    /* Subtle “film grain” to feel more premium */
+    .grain {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.10;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
     }
 
     .logo-img {
       width: 140px;
       height: auto;
-      margin-bottom: 40px;
-      z-index: 1;
-      filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
+      margin-bottom: 34px;
+      z-index: 2;
+      filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.35));
     }
 
     .box-container {
       perspective: 1200px;
-      margin-bottom: 40px;
-      z-index: 1;
+      margin-bottom: 34px;
+      z-index: 2;
     }
 
     .rotating-box {
-      width: 320px;
+      width: 330px;
       height: auto;
       border-radius: 12px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 55px rgba(0,0,0,0.65);
       transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.8s ease;
       transform: rotateY(-10deg) rotateX(5deg);
       display: block;
     }
 
     .box-container:hover .rotating-box {
-      transform: rotateY(15deg) rotateX(-5deg) scale(1.03);
-      box-shadow: 0 40px 80px rgba(157, 129, 137, 0.3);
+      transform: rotateY(16deg) rotateX(-6deg) scale(1.03);
+      box-shadow: 0 40px 90px rgba(157, 129, 137, 0.34);
     }
 
     h1 {
       font-size: clamp(2rem, 5vw, 3rem);
       color: var(--quest-pink);
-      margin: 10px 0;
+      margin: 10px 0 6px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      z-index: 1;
+      z-index: 2;
+      text-shadow: 0 0 18px rgba(157,129,137,0.22);
     }
 
     .tagline {
       font-size: 1.15rem;
-      color: #8d99ae;
-      margin-bottom: 32px;
+      color: #b6c0d1;
+      margin-bottom: 28px;
       font-style: italic;
-      z-index: 1;
-      max-width: 52ch;
+      max-width: 58ch;
+      z-index: 2;
     }
 
     .btn-primary {
@@ -105,29 +140,45 @@
       padding: 14px 35px;
       border-radius: 30px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transition: all 0.3s ease;
-      z-index: 1;
+      transition: all 0.25s ease;
+      z-index: 2;
       display: inline-block;
     }
 
     .btn-primary:hover {
       background-color: var(--quest-pink);
       color: var(--quest-dark);
+      transform: translateY(-1px);
     }
 
-    .meta-row {
-      margin-top: 18px;
-      color: #cbd5e0;
-      font-size: 0.95rem;
-      z-index: 1;
+    .micro-copy {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: #9aa7bf;
+      z-index: 2;
     }
 
+    /* HOW TO PLAY */
     .how-to-play {
-      padding: 90px 20px;
+      padding: 92px 20px;
       background-color: var(--quest-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .how-to-play::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(500px 380px at 10% 15%, rgba(157,129,137,0.14) 0%, rgba(157,129,137,0) 60%),
+        radial-gradient(520px 420px at 90% 85%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 65%);
+      filter: blur(20px);
+      opacity: 0.8;
+      pointer-events: none;
     }
 
     .how-to-play h2 {
@@ -136,55 +187,121 @@
       font-size: 2.2rem;
       margin-bottom: 60px;
       letter-spacing: 0.08em;
+      position: relative;
+      z-index: 1;
     }
 
     .step {
-      max-width: 650px;
-      margin: 0 auto 50px auto;
+      max-width: 680px;
+      margin: 0 auto 48px auto;
       text-align: left;
       border-left: 4px solid var(--quest-pink);
-      padding-left: 30px;
+      padding-left: 28px;
+      position: relative;
+      z-index: 1;
     }
 
     .step h3 {
       color: var(--quest-pink);
-      font-size: 1.5rem;
-      margin-top: 0;
+      font-size: 1.45rem;
+      margin: 0 0 8px;
     }
 
     .step p {
       font-size: 1.05rem;
-      line-height: 1.7;
+      line-height: 1.75;
       color: #cbd5e0;
+      margin: 0;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #8d99ae;
+      margin-top: 34px;
+      position: relative;
+      z-index: 1;
     }
 
     .how-cta {
-      margin-top: 32px;
+      margin-top: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 92px 20px;
+      background-color: rgba(157, 129, 137, 0.06);
+      border-top: 1px solid rgba(157, 129, 137, 0.22);
+    }
+
+    .cta-section h2 {
+      color: var(--quest-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 2rem;
+      margin: 0 0 14px;
+    }
+
+    .cta-section p {
+      color: #cbd5e0;
+      max-width: 60ch;
+      margin: 0 auto 26px;
+      line-height: 1.7;
+    }
+
+    .btn-secondary {
+      background: rgba(237,242,244,0.06);
+      color: var(--quest-text);
+      border: 1px solid rgba(237,242,244,0.18);
+      padding: 14px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 0.25s ease;
+      margin-left: 10px;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(196,164,132,0.55);
+      transform: translateY(-1px);
     }
 
     footer {
-      padding: 60px 20px;
+      padding: 56px 20px;
       font-size: 0.9rem;
       color: #64748b;
+    }
+
+    /* Motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .rotating-box, .btn-primary, .btn-secondary { transition: none; }
+    }
+
+    @media (max-width: 420px) {
+      .rotating-box { width: 290px; }
+      .tagline { font-size: 1.05rem; }
     }
   </style>
 </head>
 
 <body>
   <section class="hero">
-    <canvas id="hero-canvas"></canvas>
+    <canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
 
     <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" width="140" height="140" />
 
     <div class="box-container">
-      <img src="box-front.png" alt="3rd Eye Quest Game Box" class="rotating-box" width="320" height="400" />
+      <img src="box-front.png" alt="3rd Eye Quest Game Box" class="rotating-box" width="330" height="420" />
     </div>
 
     <h1>3rd Eye Quest</h1>
     <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
 
     <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-    <div class="meta-row">Fast rounds • Group play • Intuition training</div>
+    <div class="micro-copy">Fast rounds • Group play • Intuition training</div>
   </section>
 
   <section class="how-to-play">
@@ -192,26 +309,43 @@
 
     <div class="step">
       <h3>1. The Judge Selects a Target</h3>
-      <p>One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks. They keep the image hidden from the other players.</p>
+      <p>
+        One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks.
+        They keep the image hidden from the other players.
+      </p>
     </div>
 
     <div class="step">
       <h3>2. Viewers Sense the Unseen</h3>
-      <p>Viewers close their eyes, breathe deeply, and record their intuitive impressions. Use the <strong>Digital Assist Guide</strong> to probe for textures, emotions, and shapes.</p>
+      <p>
+        Viewers close their eyes, breathe deeply, and record intuitive impressions. Use the <strong>Digital Assist Guide</strong>
+        to probe for textures, emotions, and shapes.
+      </p>
     </div>
 
     <div class="step">
       <h3>3. Reveal and Reward</h3>
-      <p>The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card. The most intuitive player is crowned the Master Viewer!</p>
+      <p>
+        The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card.
+        The most intuitive player is crowned the Master Viewer!
+      </p>
     </div>
 
-    <p style="font-style: italic; color: #8d99ae; margin-top: 40px;">
-      "Describe, don't define. Trust your first signal."
-    </p>
+    <p class="quote">"Describe, don't define. Trust your first signal."</p>
 
     <div class="how-cta">
       <a href="assist.html" class="btn-primary">Open Assist Guide Again</a>
     </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to Play?</h2>
+    <p>
+      3rd Eye Quest is built for game nights, spiritual circles, and anyone who wants to train perception in a fun way.
+      Bring curiosity. Leave overthinking.
+    </p>
+    <a href="assist.html" class="btn-primary">Start with the Guide</a>
+    <a href="#how" class="btn-secondary" onclick="document.querySelector('.how-to-play').scrollIntoView({behavior:'smooth'})">See How It Works</a>
   </section>
 
   <footer>
@@ -222,10 +356,13 @@
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Optional: make the canvas match the hero size (prevents blur if you animate later)
-    const canvas = document.getElementById("hero-canvas");
+    // --- Galaxy Starfield (lightweight canvas) ---
+    const canvas = document.getElementById("galaxy-canvas");
     const hero = document.querySelector(".hero");
     const ctx = canvas.getContext("2d");
+
+    let stars = [];
+    let raf = null;
 
     function resizeCanvas() {
       const rect = hero.getBoundingClientRect();
@@ -235,12 +372,93 @@
       canvas.style.width = rect.width + "px";
       canvas.style.height = rect.height + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, rect.width, rect.height);
-      // (no drawing yet — this just sizes it correctly)
+
+      // Re-seed stars on resize for consistent density
+      seedStars(rect.width, rect.height);
+    }
+
+    function seedStars(w, h) {
+      const count = Math.floor((w * h) / 6000); // density
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.3 + 0.2,
+        a: Math.random() * 0.8 + 0.15,
+        s: Math.random() * 0.35 + 0.05, // speed
+        tw: Math.random() * 0.02 + 0.005 // twinkle
+      }));
+    }
+
+    function drawNebula(w, h, t) {
+      // Soft moving glow blobs
+      const g1 = ctx.createRadialGradient(w*0.25, h*0.30, 0, w*0.25, h*0.30, Math.max(w,h)*0.65);
+      g1.addColorStop(0, "rgba(157,129,137,0.18)");
+      g1.addColorStop(1, "rgba(157,129,137,0.0)");
+      ctx.fillStyle = g1;
+      ctx.fillRect(0,0,w,h);
+
+      const cx = w*0.75 + Math.sin(t*0.0002)*60;
+      const cy = h*0.28 + Math.cos(t*0.00025)*50;
+      const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w,h)*0.55);
+      g2.addColorStop(0, "rgba(196,164,132,0.12)");
+      g2.addColorStop(1, "rgba(196,164,132,0.0)");
+      ctx.fillStyle = g2;
+      ctx.fillRect(0,0,w,h);
+
+      const cx3 = w*0.55 + Math.cos(t*0.00018)*70;
+      const cy3 = h*0.78 + Math.sin(t*0.00022)*55;
+      const g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, Math.max(w,h)*0.7);
+      g3.addColorStop(0, "rgba(120,90,255,0.10)");
+      g3.addColorStop(1, "rgba(120,90,255,0.0)");
+      ctx.fillStyle = g3;
+      ctx.fillRect(0,0,w,h);
+    }
+
+    function render(t) {
+      const w = hero.clientWidth;
+      const h = hero.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Subtle background nebula glow
+      drawNebula(w, h, t);
+
+      // Stars
+      for (const st of stars) {
+        // drift downward slowly
+        st.y += st.s;
+        if (st.y > h + 10) {
+          st.y = -10;
+          st.x = Math.random() * w;
+        }
+
+        // twinkle
+        st.a += (Math.random() - 0.5) * st.tw;
+        if (st.a < 0.12) st.a = 0.12;
+        if (st.a > 0.95) st.a = 0.95;
+
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(237,242,244,${st.a})`;
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(render);
+    }
+
+    // Motion accessibility
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function start() {
+      cancelAnimationFrame(raf);
+      if (reduceMotion.matches) return; // no animation if user prefers reduced motion
+      raf = requestAnimationFrame(render);
     }
 
     window.addEventListener("resize", resizeCanvas);
+    reduceMotion.addEventListener?.("change", () => { resizeCanvas(); start(); });
+
     resizeCanvas();
+    start();
   </script>
 </body>
 </html>
