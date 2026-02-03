@@ -45,7 +45,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -55,12 +55,10 @@
       text-decoration: none;
       font-size: 0.95rem;
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .back-link:hover {
-      text-decoration: underline;
-    }
+    .back-link:hover { text-decoration: underline; }
 
     .back-link:focus-visible {
       outline: 2px solid var(--quest-gold);
@@ -70,11 +68,11 @@
 
     .golden-rules {
       background: rgba(157, 129, 137, 0.1);
-      padding: 20px;
+      padding: 18px;
       border-radius: 10px;
       text-align: center;
       font-style: italic;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border: 1px dashed var(--quest-pink);
       color: #cbd5e0;
     }
@@ -84,17 +82,17 @@
       background: rgba(196, 164, 132, 0.08);
       border: 1px solid rgba(196, 164, 132, 0.4);
       border-radius: 14px;
-      padding: 20px;
+      padding: 18px;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 16px;
     }
 
     .timer-display {
       font-size: 2.8rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.12em;
       color: var(--quest-gold);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .timer-controls {
@@ -102,6 +100,7 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
+      margin-bottom: 10px;
     }
 
     .timer-controls button {
@@ -110,7 +109,7 @@
       border: 2px solid var(--quest-pink);
       padding: 8px 16px;
       border-radius: 20px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.25s ease;
     }
@@ -118,6 +117,33 @@
     .timer-controls button:hover {
       background: var(--quest-pink);
       color: var(--quest-dark);
+    }
+
+    .timer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      color: #8d99ae;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    .timer-meta label {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(157, 129, 137, 0.25);
+      background: rgba(157, 129, 137, 0.06);
+    }
+
+    .timer-meta input {
+      transform: scale(1.08);
     }
 
     .timer-box.finished .timer-display {
@@ -130,31 +156,74 @@
       100% { opacity: 1; }
     }
 
-    /* GRID LAYOUT */
+    /* Advanced toggle */
+    .advanced-toggle {
+      margin: 0 0 18px 0;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(157, 129, 137, 0.08);
+      border: 1px solid rgba(157, 129, 137, 0.3);
+      text-align: center;
+    }
+
+    .advanced-toggle label {
+      font-weight: 800;
+      color: var(--quest-pink);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .advanced-toggle input {
+      margin-right: 10px;
+      transform: scale(1.15);
+    }
+
+    .toggle-note {
+      font-size: 0.82rem;
+      color: #8d99ae;
+      margin: 6px 0 0 0;
+    }
+
+    /* Advanced content layer */
+    .advanced {
+      display: none;
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 2px dashed rgba(196, 164, 132, 0.45);
+      color: #cbd5e0;
+      font-size: 0.87rem;
+      line-height: 1.45;
+    }
+
+    body.advanced-on .advanced {
+      display: block;
+    }
+
+    /* GRID */
     .assist-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      gap: 18px;
+      margin-top: 10px;
     }
 
     .probe-card {
       background: var(--quest-card);
-      padding: 25px;
+      padding: 22px;
       border-radius: 15px;
       border-top: 4px solid var(--quest-pink);
-      transition: transform 0.3s ease, border-top-color 0.3s ease;
+      transition: transform 0.25s ease, border-top-color 0.25s ease;
     }
 
     .probe-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-top-color: var(--quest-gold);
     }
 
     h2 {
       color: var(--quest-pink);
-      font-size: 1.4rem;
-      margin-top: 0;
+      font-size: 1.35rem;
+      margin: 0 0 10px 0;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -167,20 +236,26 @@
 
     li {
       margin-bottom: 12px;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(237, 242, 244, 0.1);
-      font-size: 0.95rem;
-      line-height: 1.4;
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
+    li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
     }
 
     .label {
       color: var(--quest-gold);
-      font-weight: 700;
+      font-weight: 800;
       display: block;
       font-size: 0.8rem;
       text-transform: uppercase;
-      margin-bottom: 2px;
-      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+      letter-spacing: 0.05em;
     }
 
     footer {
@@ -192,8 +267,8 @@
 
     @media (max-width: 420px) {
       .probe-card { padding: 18px; }
-      li { font-size: 0.92rem; }
       .timer-display { font-size: 2.3rem; }
+      li { font-size: 0.93rem; }
     }
   </style>
 </head>
@@ -211,8 +286,8 @@
       "Relax your mind, describe don't define, and trust your first signal."
     </div>
 
-    <!-- TIMER BOX -->
-    <div class="timer-box">
+    <!-- TIMER -->
+    <div class="timer-box" id="timerBox">
       <div class="timer-display" id="timerDisplay">00:30</div>
 
       <div class="timer-controls">
@@ -222,49 +297,240 @@
         <button type="button" id="startPause">Start</button>
         <button type="button" id="reset">Reset</button>
       </div>
+
+      <div class="timer-meta">
+        <label title="Plays a soft chime when the timer ends">
+          <input type="checkbox" id="chimeToggle" checked />
+          Soft chime
+        </label>
+      </div>
     </div>
 
+    <!-- ADVANCED TOGGLE -->
+    <div class="advanced-toggle">
+      <label>
+        <input type="checkbox" id="advancedToggle" />
+        Advanced Viewer Mode
+      </label>
+      <p class="toggle-note">Reveals deeper probes for trained viewers (beginners can ignore)</p>
+    </div>
+
+    <!-- PROBES -->
     <div class="assist-grid">
+      <!-- LANDSCAPE -->
       <div class="probe-card">
         <h2>Landscape</h2>
         <ul>
-          <li><span class="label">Terrain</span> Flat, rocky, uneven, or elevated?</li>
-          <li><span class="label">Environment</span> Urban, rural, natural, or harsh?</li>
-          <li><span class="label">Vegetation</span> Lush, sparse, or barren?</li>
-          <li><span class="label">Water</span> Still, flowing, or frozen?</li>
-          <li><span class="label">Mood</span> Reverent, peaceful, or oppressive?</li>
+          <li>
+            <span class="label">Terrain</span>
+            Flat, rocky, uneven, elevated, or sloping?
+            <div class="advanced">
+              Probe gradients: steep vs gentle, wide-open vs confined, depth/valley vs peak/ridge.
+            </div>
+          </li>
+          <li>
+            <span class="label">Environment</span>
+            Urban, rural, natural, industrial, or harsh?
+            <div class="advanced">
+              Sense “built” vs “wild.” If built: structured, grid-like, metallic, repeating geometry.
+            </div>
+          </li>
+          <li>
+            <span class="label">Vegetation</span>
+            Lush, sparse, barren, leafy, or thorny?
+            <div class="advanced">
+              Texture cue: soft/fibrous vs stiff/spiky. Also: density pockets (clusters) vs uniform spread.
+            </div>
+          </li>
+          <li>
+            <span class="label">Water</span>
+            Still, flowing, crashing, misty, or frozen?
+            <div class="advanced">
+              Listen for “sound”: hush (still), rush (flow), roar (crash). Sense edge-lines and reflections.
+            </div>
+          </li>
+          <li>
+            <span class="label">Sky & Light</span>
+            Bright, dim, overcast, glowing, or shadowy?
+            <div class="advanced">
+              Time-of-day impression can be symbolic—treat it as “light quality,” not a literal clock.
+            </div>
+          </li>
+          <li>
+            <span class="label">Temperature</span>
+            Warm, cool, humid, dry, or windy?
+            <div class="advanced">
+              Temperature often acts like a “signal tag.” Note shifts (warm → cool) rather than a number.
+            </div>
+          </li>
+          <li>
+            <span class="label">Mood</span>
+            Peaceful, reverent, tense, eerie, or expansive?
+            <div class="advanced">
+              Separate “your emotion” from “site atmosphere.” Ask: does the mood feel ambient and external?
+            </div>
+          </li>
         </ul>
       </div>
 
+      <!-- ANIMAL -->
       <div class="probe-card">
         <h2>Animal</h2>
         <ul>
-          <li><span class="label">Energy</span> Calm, fierce, cautious, or playful?</li>
-          <li><span class="label">Size</span> Small, medium, large, or massive?</li>
-          <li><span class="label">Texture</span> Fur, feathers, scales, or smooth?</li>
-          <li><span class="label">Movement</span> Crawling, flying, swimming, or still?</li>
-          <li><span class="label">Location</span> Air, land, water, or sky?</li>
+          <li>
+            <span class="label">Energy</span>
+            Calm, fierce, cautious, playful, or alert?
+            <div class="advanced">
+              Probe intent: defensive, predatory, curious, social, solitary. Observe without labeling.
+            </div>
+          </li>
+          <li>
+            <span class="label">Size</span>
+            Small, medium, large, massive?
+            <div class="advanced">
+              Compare to human scale: hand-sized, knee-high, chest-high, larger-than-you.
+            </div>
+          </li>
+          <li>
+            <span class="label">Texture</span>
+            Fur, feathers, scales, smooth, or armored?
+            <div class="advanced">
+              Note directional texture (grain), thickness, and “shine” (sleek vs matte).
+            </div>
+          </li>
+          <li>
+            <span class="label">Movement</span>
+            Crawling, hopping, flying, swimming, stalking, still?
+            <div class="advanced">
+              Movement quality matters: jerky vs fluid, gliding vs pounding, drifting vs darting.
+            </div>
+          </li>
+          <li>
+            <span class="label">Body Shape</span>
+            Long, compact, tall, rounded, thin, or wide?
+            <div class="advanced">
+              Scan “silhouette”: neck length, limb style, tail presence, head shape—avoid naming the animal.
+            </div>
+          </li>
+          <li>
+            <span class="label">Sound / Presence</span>
+            Quiet, loud, gentle, intimidating?
+            <div class="advanced">
+              “Presence” can be energetic. Ask: does it feel innocent, ancient, sharp, heavy, or quick?
+            </div>
+          </li>
+          <li>
+            <span class="label">Location</span>
+            Air, land, water, trees, underground, sky?
+            <div class="advanced">
+              Habitat is a strong classifier. Note environment cues (wet, sandy, leafy, rocky).
+            </div>
+          </li>
         </ul>
       </div>
 
+      <!-- OBJECT -->
       <div class="probe-card">
         <h2>Object</h2>
         <ul>
-          <li><span class="label">Nature</span> Functional, artistic, or symbolic?</li>
-          <li><span class="label">Weight</span> Heavy, light, anchored, floating?</li>
-          <li><span class="label">Material</span> Metal, stone, wood, fabric, or crystal?</li>
-          <li><span class="label">Reflectivity</span> Shiny, matte, or translucent?</li>
-          <li><span class="label">Density</span> Solid, flexible, hollow, layered?</li>
+          <li>
+            <span class="label">Purpose</span>
+            Functional, decorative, artistic, or symbolic?
+            <div class="advanced">
+              Ask: tool vs container vs ornament vs device. “Use-case” impressions are gold.
+            </div>
+          </li>
+          <li>
+            <span class="label">Material</span>
+            Metal, stone, wood, fabric, plastic, glass, crystal?
+            <div class="advanced">
+              Probe conductivity (metal), grain (wood), brittleness (glass), softness (fabric), “clean” (plastic).
+            </div>
+          </li>
+          <li>
+            <span class="label">Weight</span>
+            Heavy, light, dense, hollow, floating?
+            <div class="advanced">
+              Note how it “sits” in space: grounded, suspended, mounted, handheld.
+            </div>
+          </li>
+          <li>
+            <span class="label">Shape</span>
+            Round, angular, long, flat, layered, irregular?
+            <div class="advanced">
+              Identify geometry: cylinder, sphere, cone, plate, ring, stacked layers—describe, don’t name.
+            </div>
+          </li>
+          <li>
+            <span class="label">Surface</span>
+            Smooth, rough, ridged, sticky, wet, cold?
+            <div class="advanced">
+              Micro-texture matters: polished vs brushed vs pitted vs fibrous.
+            </div>
+          </li>
+          <li>
+            <span class="label">Reflectivity</span>
+            Shiny, matte, translucent, glowing?
+            <div class="advanced">
+              If reflective: mirror-like vs metallic sheen. If translucent: milky vs clear.
+            </div>
+          </li>
+          <li>
+            <span class="label">Details</span>
+            Simple, patterned, engraved, complex?
+            <div class="advanced">
+              Look for repeating motifs, symbols, seams, joints, hinges, edges, or “parts.”
+            </div>
+          </li>
         </ul>
       </div>
 
+      <!-- COLOR & ENERGY -->
       <div class="probe-card">
         <h2>Color &amp; Energy</h2>
         <ul>
-          <li><span class="label">Tone</span> Bright, muted, pastel, or deep?</li>
-          <li><span class="label">Temp</span> Warm (reds/golds) or Cool (blues/greens)?</li>
-          <li><span class="label">Feeling</span> Joyful, tense, serene, heavy, electric?</li>
-          <li><span class="label">Origin</span> Sky, earth, water, fire, or aura?</li>
+          <li>
+            <span class="label">Tone</span>
+            Bright, muted, pastel, deep, or neon?
+            <div class="advanced">
+              Note saturation: washed-out vs vivid. Contrast: high-contrast vs blended.
+            </div>
+          </li>
+          <li>
+            <span class="label">Temperature</span>
+            Warm (reds/golds) or cool (blues/greens)?
+            <div class="advanced">
+              Temperature can describe emotion too—track it as a “signal flavor,” not a conclusion.
+            </div>
+          </li>
+          <li>
+            <span class="label">Dominant vs Accent</span>
+            One main color or multiple accents?
+            <div class="advanced">
+              Observe patterning: stripes, spots, gradients, blocks, halos, edges.
+            </div>
+          </li>
+          <li>
+            <span class="label">Feeling</span>
+            Joyful, tense, serene, heavy, electric?
+            <div class="advanced">
+              Separate “emotional bleed” from sensory data. Ask: is this feeling coming from the target or from me?
+            </div>
+          </li>
+          <li>
+            <span class="label">Origin</span>
+            Sky, earth, water, fire, light, aura?
+            <div class="advanced">
+              “Origin” can be literal or symbolic. Treat it as a direction cue (up/down/around/inside).
+            </div>
+          </li>
+          <li>
+            <span class="label">Intensity</span>
+            Soft, strong, pulsing, steady?
+            <div class="advanced">
+              Notice rhythm: constant vs flickering vs surging. Rhythm often correlates with movement or emotion.
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -275,10 +541,77 @@
   </footer>
 
   <script>
-    // Dynamic footer year
+    // -------------------------
+    // Footer year
+    // -------------------------
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // -------------------------
+    // Advanced toggle (remember preference)
+    // -------------------------
+    const advancedToggle = document.getElementById("advancedToggle");
+    const savedAdvanced = localStorage.getItem("teq_advanced") === "1";
+    if (savedAdvanced) {
+      document.body.classList.add("advanced-on");
+      advancedToggle.checked = true;
+    }
+
+    advancedToggle.addEventListener("change", () => {
+      const on = advancedToggle.checked;
+      document.body.classList.toggle("advanced-on", on);
+      localStorage.setItem("teq_advanced", on ? "1" : "0");
+    });
+
+    // -------------------------
+    // Soft chime (Web Audio)
+    // - Must be triggered after a user gesture (Start button click counts).
+    // -------------------------
+    let audioCtx = null;
+
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playChime() {
+      const chimeOn = document.getElementById("chimeToggle").checked;
+      if (!chimeOn) return;
+
+      const ctx = ensureAudioContext();
+
+      // Two layered sines for a gentle bell-ish shimmer
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc1.type = "sine";
+      osc2.type = "sine";
+      osc1.frequency.value = 528;  // pleasant base
+      osc2.frequency.value = 792;  // light harmony
+
+      // Very soft envelope
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.25);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start();
+      osc2.start();
+      osc1.stop(ctx.currentTime + 1.3);
+      osc2.stop(ctx.currentTime + 1.3);
+    }
+
+    // -------------------------
     // Timer logic
+    // -------------------------
     let totalTime = 30;
     let remaining = totalTime;
     let interval = null;
@@ -287,7 +620,7 @@
     const display = document.getElementById("timerDisplay");
     const startPauseBtn = document.getElementById("startPause");
     const resetBtn = document.getElementById("reset");
-    const timerBox = document.querySelector(".timer-box");
+    const timerBox = document.getElementById("timerBox");
 
     function formatTime(seconds) {
       const m = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -300,6 +633,9 @@
     }
 
     function startTimer() {
+      // user gesture -> unlock audio context
+      ensureAudioContext();
+
       if (interval) return;
       running = true;
       startPauseBtn.textContent = "Pause";
@@ -314,6 +650,7 @@
           running = false;
           timerBox.classList.add("finished");
           startPauseBtn.textContent = "Start";
+          playChime();
         }
       }, 1000);
     }
