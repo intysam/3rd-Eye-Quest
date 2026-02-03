@@ -7,8 +7,6 @@
     
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a00d9ac7897706f6ee8f12932/8eecba87921f2bde24de07b3b.js");</script>
-    
     <style>
         :root {
             --quest-pink: #9d8189;
@@ -27,151 +25,118 @@
             overflow-x: hidden;
         }
 
-        /* NEW: PARTICLE CANVAS BACKGROUND */
+        /* FIXED: HERO LAYOUT */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
+            position: relative;
+        }
+
         #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             opacity: 0.3;
         }
 
-        .hero {
-            position: relative;
-            padding: 60px 20px;
-            background: linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
-            overflow: hidden;
-        }
-
-        /* ADD-ON: PULSING LOGO */
-        @keyframes pulse {
-            0% { filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3)); transform: scale(1); }
-            50% { filter: drop-shadow(0 0 25px rgba(157, 129, 137, 0.6)); transform: scale(1.02); }
-            100% { filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3)); transform: scale(1); }
-        }
-
         .logo-img {
-            width: 120px;
+            width: 140px;
             height: auto;
-            margin-bottom: 20px;
-            animation: pulse 4s infinite ease-in-out;
+            margin-bottom: 40px;
+            z-index: 1;
+            filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.3));
         }
 
-        /* 3D BOX ANIMATION */
+        /* FIXED: BOX SIZE & POSITION */
         .box-container {
-            perspective: 1000px;
-            display: inline-block;
-            margin: 30px 0;
+            perspective: 1200px;
+            margin-bottom: 40px;
+            z-index: 1;
         }
 
         .rotating-box {
-            width: 280px;
+            width: 320px; /* Increased size */
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             transform: rotateY(-10deg) rotateX(5deg);
         }
 
         .box-container:hover .rotating-box {
-            transform: rotateY(10deg) rotateX(-5deg) scale(1.05);
-            box-shadow: 0 30px 60px rgba(157, 129, 137, 0.4);
+            transform: rotateY(15deg) rotateX(-5deg) scale(1.03);
+            box-shadow: 0 40px 80px rgba(157, 129, 137, 0.3);
         }
 
         h1 {
             font-size: 3rem;
             color: var(--quest-pink);
             margin: 10px 0;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            z-index: 1;
         }
 
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #8d99ae;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-style: italic;
+            z-index: 1;
         }
 
         .btn-primary {
-            display: inline-block;
             background-color: transparent;
             color: var(--quest-pink);
             border: 2px solid var(--quest-pink);
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         .btn-primary:hover {
             background-color: var(--quest-pink);
             color: var(--quest-dark);
-            box-shadow: 0 0 15px rgba(157, 129, 137, 0.4);
         }
 
+        /* FIXED: HOW TO PLAY VISIBILITY */
         .how-to-play {
-            padding: 80px 20px;
+            padding: 100px 20px;
             background-color: var(--quest-card);
         }
 
-        /* ADD-ON: ANIMATED REVEAL STEPS */
         .step {
-            max-width: 700px;
-            margin: 0 auto 40px auto;
+            max-width: 650px;
+            margin: 0 auto 50px auto;
             text-align: left;
-            border-left: 3px solid var(--quest-pink);
-            padding-left: 25px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            border-left: 4px solid var(--quest-pink);
+            padding-left: 30px;
+            /* Simple fade-in that works even if JS fails */
+            opacity: 1; 
+            transition: transform 0.6s ease;
         }
 
-        .step.reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .step h3 { color: var(--quest-pink); margin-top: 0; }
+        .step h3 { color: var(--quest-pink); font-size: 1.5rem; margin-top: 0; }
+        .step p { font-size: 1.1rem; line-height: 1.7; color: #cbd5e0; }
 
         .cta-section {
-            padding: 80px 20px;
-            background-color: rgba(157, 129, 137, 0.1);
-            border-top: 1px solid var(--quest-pink);
+            padding: 100px 20px;
+            background-color: rgba(157, 129, 137, 0.05);
+            border-top: 1px solid rgba(157, 129, 137, 0.2);
         }
 
-        #mce-EMAIL {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            border-radius: 30px;
-            border: 2px solid var(--quest-pink);
-            background: var(--quest-dark);
-            color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-
-        #mc-embedded-subscribe {
-            background-color: var(--quest-pink) !important;
-            color: white !important;
-            padding: 15px 40px !important;
-            border-radius: 30px !important;
-            font-weight: bold !important;
-            border: none !important;
-            cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        footer { padding: 50px; font-size: 0.8rem; color: #6d7687; }
+        footer { padding: 60px; font-size: 0.9rem; color: #64748b; }
     </style>
 </head>
 <body>
@@ -188,28 +153,25 @@
     </section>
 
     <section class="how-to-play">
-        <h2 style="color: var(--quest-pink); text-transform: uppercase; margin-bottom: 50px;">How to Play</h2>
+        <h2 style="color: var(--quest-pink); text-transform: uppercase; font-size: 2.2rem; margin-bottom: 60px;">How to Play</h2>
         
         <div class="step">
             <h3>1. The Judge Selects a Target</h3>
-            <p>One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks. They keep the image hidden from others.</p>
+            <p>One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks. They keep the image hidden from the other players.</p>
         </div>
 
         <div class="step">
             <h3>2. Viewers Sense the Unseen</h3>
-            <p>Viewers close their eyes and describe intuitive impressions: textures, shapes, and emotions. Remember the golden rule: <strong>Describe, don't define</strong>.</p>
+            <p>Viewers close their eyes, breathe deeply, and record their intuitive impressions. Use the <strong>Digital Assist Guide</strong> above to probe for textures, emotions, and shapes.</p>
         </div>
 
         <div class="step">
             <h3>3. Reveal and Reward</h3>
-            <p>The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card.</p>
+            <p>The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card. The most intuitive player is crowned the Master Viewer!</p>
         </div>
+        
+        <p style="font-style: italic; color: #8d99ae; margin-top: 40px;">"Describe, don't define. Trust your first signal."</p>
     </section>
 
-    <section id="signup" class="cta-section">
-        <h2 style="color: var(--quest-pink);">Join the Waitlist</h2>
-        <p>Launching February 2026. Be the first to enter the quest.</p>
-        
-        <div id="mc_embed_signup">
-            <form action="
- 
+    </body>
+</html>
