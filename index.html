@@ -778,17 +778,55 @@ const cardFiles = [
   "000.png",
   "003.png",
   "006.png",
-  ...
+  "010.png",
+  "067.png",
+  "068.png",
+  "069.png",
+  "070.png",
+  "083.png",
+  "084.png",
+  "085.png",
+  "087.png"
 ];
 
-// all the new functions here
+function randomSelection(arr, count){
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+function setFeaturedCards(){
+  const picks = randomSelection(cardFiles, 5);
+  for(let i=0;i<5;i++){
+    const img = document.getElementById(`featured${i}`);
+    if(img){
+      img.src = "cards/" + picks[i];
+    }
+  }
+}
+
+function buildCarousel(){
+  const track = document.getElementById("carouselTrack");
+  if(!track) return;
+  track.innerHTML = "";
+
+  cardFiles.forEach(file => {
+    const card = document.createElement("div");
+    card.className = "carousel-card";
+
+    const img = document.createElement("img");
+    img.src = "cards/" + file;
+    img.alt = "3rd Eye Quest Card";
+
+    card.appendChild(img);
+    track.appendChild(card);
+  });
+}
+
+document.getElementById("shuffleCards").addEventListener("click", setFeaturedCards);
 
 setFeaturedCards();
 buildCarousel();
 
 </script>
-
-</script>
-
 </body>
 </html>
