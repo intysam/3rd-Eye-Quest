@@ -1,465 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3rd Eye Quest | The Ultimate Card Game of Intuition</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3rd Eye Quest | The Remote Viewing Card Game</title>
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <meta name="description" content="3rd Eye Quest is a premium intuition card game designed to sharpen perception, signal-reading, and playful truth-seeking." />
-  <meta property="og:title" content="3rd Eye Quest | The Ultimate Card Game of Intuition" />
-  <meta property="og:description" content="Unlock your intuition. Probe the truth. Master the quest." />
-  <meta property="og:image" content="box-front.png" />
+<meta name="description" content="3rd Eye Quest is a remote viewing card game designed to train perception, intuition, and signal-reading through structured play." />
 
-  <style>
-    :root {
-      --quest-pink: #9d8189;
-      --quest-dark: #1a1a2e;
-      --quest-card: #2b2d42;
-      --quest-text: #edf2f4;
-      --quest-gold: #c4a484;
-    }
+<!-- Mailchimp Connected Site Script -->
+<script id="mcjs">
+!function(c,h,i,m,p){
+  m=c.createElement(h),
+  p=c.getElementsByTagName(h)[0],
+  m.async=1,
+  m.src=i,
+  p.parentNode.insertBefore(m,p)
+}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a00d9ac7897706f6ee8f12932/8eecba87921f2bde24de07b3b.js");
+</script>
 
-    * { box-sizing: border-box; }
+<style>
+:root {
+  --quest-pink: #9d8189;
+  --quest-dark: #1a1a2e;
+  --quest-card: #2b2d42;
+  --quest-text: #edf2f4;
+  --quest-gold: #c4a484;
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--quest-dark);
-      color: var(--quest-text);
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      overflow-x: hidden;
-    }
+* { box-sizing: border-box; }
 
-    /* HERO */
-    .hero {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 84px 20px 70px;
-      background: radial-gradient(1200px 700px at 50% 20%, rgba(157,129,137,0.25) 0%, rgba(26,26,46,0.0) 55%),
-                  linear-gradient(180deg, var(--quest-dark) 0%, var(--quest-card) 100%);
-      isolation: isolate; /* keeps layered effects clean */
-      overflow: hidden;
-    }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--quest-dark);
+  color: var(--quest-text);
+  margin: 0;
+  text-align: center;
+  overflow-x: hidden;
+}
 
-    /* Galaxy "nebula" overlay (CSS) */
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      background:
-        radial-gradient(600px 420px at 20% 35%, rgba(196,164,132,0.14) 0%, rgba(196,164,132,0.00) 60%),
-        radial-gradient(500px 380px at 80% 30%, rgba(157,129,137,0.18) 0%, rgba(157,129,137,0.00) 62%),
-        radial-gradient(650px 520px at 55% 70%, rgba(120,90,255,0.10) 0%, rgba(120,90,255,0.00) 65%);
-      filter: blur(18px);
-      opacity: 0.9;
-      z-index: 0;
-      transform: rotate(-8deg);
-      pointer-events: none;
-    }
+/* HERO */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 90px 20px 70px;
+  background: linear-gradient(180deg, var(--quest-dark), var(--quest-card));
+  overflow: hidden;
+}
 
-    /* Starfield canvas */
-    #galaxy-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      opacity: 0.8;
-      pointer-events: none;
-    }
+#galaxy-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.8;
+}
 
-    /* Subtle “film grain” to feel more premium */
-    .grain {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.10;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-    }
+.logo-img {
+  width: 140px;
+  margin-bottom: 30px;
+  z-index: 2;
+}
 
-    .logo-img {
-      width: 140px;
-      height: auto;
-      margin-bottom: 34px;
-      z-index: 2;
-      filter: drop-shadow(0 0 10px rgba(157, 129, 137, 0.35));
-    }
+.box-container { perspective: 1200px; z-index: 2; }
+.rotating-box {
+  width: 330px;
+  border-radius: 12px;
+  box-shadow: 0 25px 55px rgba(0,0,0,0.65);
+  transition: transform 0.8s ease;
+  transform: rotateY(-10deg) rotateX(5deg);
+}
+.box-container:hover .rotating-box {
+  transform: rotateY(15deg) rotateX(-5deg) scale(1.03);
+}
 
-    .box-container {
-      perspective: 1200px;
-      margin-bottom: 34px;
-      z-index: 2;
-    }
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--quest-pink);
+  margin: 20px 0 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 2;
+}
 
-    .rotating-box {
-      width: 330px;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 25px 55px rgba(0,0,0,0.65);
-      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.8s ease;
-      transform: rotateY(-10deg) rotateX(5deg);
-      display: block;
-    }
+.tagline {
+  font-style: italic;
+  color: #b6c0d1;
+  max-width: 60ch;
+  z-index: 2;
+}
 
-    .box-container:hover .rotating-box {
-      transform: rotateY(16deg) rotateX(-6deg) scale(1.03);
-      box-shadow: 0 40px 90px rgba(157, 129, 137, 0.34);
-    }
+.subtag {
+  font-size: 0.95rem;
+  color: #9aa7bf;
+  max-width: 70ch;
+  margin: 15px 0 30px;
+  z-index: 2;
+}
+.subtag strong { color: var(--quest-gold); }
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--quest-pink);
-      margin: 10px 0 6px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      z-index: 2;
-      text-shadow: 0 0 18px rgba(157,129,137,0.22);
-    }
+.btn-primary {
+  border: 2px solid var(--quest-pink);
+  color: var(--quest-pink);
+  padding: 14px 35px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: var(--quest-pink);
+  color: var(--quest-dark);
+}
 
-    .tagline {
-      font-size: 1.15rem;
-      color: #b6c0d1;
-      margin-bottom: 28px;
-      font-style: italic;
-      max-width: 58ch;
-      z-index: 2;
-    }
+/* EMAIL SECTION */
+.email-section {
+  padding: 90px 20px;
+  background: rgba(26,26,46,0.6);
+}
 
-    .btn-primary {
-      background-color: transparent;
-      color: var(--quest-pink);
-      border: 2px solid var(--quest-pink);
-      padding: 14px 35px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.25s ease;
-      z-index: 2;
-      display: inline-block;
-    }
+.email-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(43,45,66,0.7);
+  padding: 35px 25px;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+}
 
-    .btn-primary:hover {
-      background-color: var(--quest-pink);
-      color: var(--quest-dark);
-      transform: translateY(-1px);
-    }
+.email-section h2 {
+  color: var(--quest-pink);
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
 
-    .micro-copy {
-      margin-top: 14px;
-      font-size: 0.9rem;
-      color: #9aa7bf;
-      z-index: 2;
-    }
+.email-section p {
+  color: #cbd5e0;
+  margin-bottom: 25px;
+}
 
-    /* HOW TO PLAY */
-    .how-to-play {
-      padding: 92px 20px;
-      background-color: var(--quest-card);
-      position: relative;
-      overflow: hidden;
-    }
+.mc-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-    .how-to-play::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(500px 380px at 10% 15%, rgba(157,129,137,0.14) 0%, rgba(157,129,137,0) 60%),
-        radial-gradient(520px 420px at 90% 85%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 65%);
-      filter: blur(20px);
-      opacity: 0.8;
-      pointer-events: none;
-    }
+.mc-row input[type="email"] {
+  width: min(420px, 92vw);
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(237,242,244,0.22);
+  background: rgba(26,26,46,0.55);
+  color: var(--quest-text);
+  font-size: 1rem;
+}
 
-    .how-to-play h2 {
-      color: var(--quest-pink);
-      text-transform: uppercase;
-      font-size: 2.2rem;
-      margin-bottom: 60px;
-      letter-spacing: 0.08em;
-      position: relative;
-      z-index: 1;
-    }
+.mc-row button {
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--quest-gold);
+  background: rgba(196,164,132,0.12);
+  color: var(--quest-text);
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.mc-row button:hover {
+  background: var(--quest-gold);
+  color: var(--quest-dark);
+}
 
-    .step {
-      max-width: 680px;
-      margin: 0 auto 48px auto;
-      text-align: left;
-      border-left: 4px solid var(--quest-pink);
-      padding-left: 28px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .step h3 {
-      color: var(--quest-pink);
-      font-size: 1.45rem;
-      margin: 0 0 8px;
-    }
-
-    .step p {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: #cbd5e0;
-      margin: 0;
-    }
-
-    .quote {
-      font-style: italic;
-      color: #8d99ae;
-      margin-top: 34px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .how-cta {
-      margin-top: 26px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      padding: 92px 20px;
-      background-color: rgba(157, 129, 137, 0.06);
-      border-top: 1px solid rgba(157, 129, 137, 0.22);
-    }
-
-    .cta-section h2 {
-      color: var(--quest-pink);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 2rem;
-      margin: 0 0 14px;
-    }
-
-    .cta-section p {
-      color: #cbd5e0;
-      max-width: 60ch;
-      margin: 0 auto 26px;
-      line-height: 1.7;
-    }
-
-    .btn-secondary {
-      background: rgba(237,242,244,0.06);
-      color: var(--quest-text);
-      border: 1px solid rgba(237,242,244,0.18);
-      padding: 14px 24px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-block;
-      transition: all 0.25s ease;
-      margin-left: 10px;
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(196,164,132,0.55);
-      transform: translateY(-1px);
-    }
-
-    footer {
-      padding: 56px 20px;
-      font-size: 0.9rem;
-      color: #64748b;
-    }
-
-    /* Motion accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      .rotating-box, .btn-primary, .btn-secondary { transition: none; }
-    }
-
-    @media (max-width: 420px) {
-      .rotating-box { width: 290px; }
-      .tagline { font-size: 1.05rem; }
-    }
-  </style>
+footer {
+  padding: 50px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+</style>
 </head>
 
 <body>
-  <section class="hero">
-    <canvas id="galaxy-canvas" aria-hidden="true"></canvas>
-    <div class="grain" aria-hidden="true"></div>
 
-    <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" width="140" height="140" />
+<section class="hero">
+  <canvas id="galaxy-canvas"></canvas>
 
-    <div class="box-container">
-     <img src="box-front.webp" alt="3rd Eye Quest Game Box" class="rotating-box" width="330" height="420" />
+  <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" />
 
-    </div>
+  <div class="box-container">
+    <img src="box-front.webp" alt="3rd Eye Quest Game Box" class="rotating-box" />
+  </div>
 
-    <h1>3rd Eye Quest</h1>
-    <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
+  <h1>3rd Eye Quest</h1>
+  <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
+  <p class="subtag">
+    <strong>A Remote Viewing game</strong> disguised as a party card game —
+    train signal over noise in fast, structured rounds.
+  </p>
 
-    <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-    <div class="micro-copy">Fast rounds • Group play • Intuition training</div>
-  </section>
+  <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
+</section>
 
-  <section class="how-to-play">
-    <h2>How to Play</h2>
-
-    <div class="step">
-      <h3>1. The Judge Selects a Target</h3>
-      <p>
-        One player acts as the Judge and secretly draws a card from the Landscape, Animal, Color, or Object decks.
-        They keep the image hidden from the other players.
-      </p>
-    </div>
-
-    <div class="step">
-      <h3>2. Viewers Sense the Unseen</h3>
-      <p>
-        Viewers close their eyes, breathe deeply, and record intuitive impressions. Use the <strong>Digital Assist Guide</strong>
-        to probe for textures, emotions, and shapes.
-      </p>
-    </div>
-
-    <div class="step">
-      <h3>3. Reveal and Reward</h3>
-      <p>
-        The Judge reveals the card. The player whose description most accurately matches the target wins the round and keeps the card.
-        The most intuitive player is crowned the Master Viewer!
-      </p>
-    </div>
-
-    <p class="quote">"Describe, don't define. Trust your first signal."</p>
-
-    <div class="how-cta">
-      <a href="assist.html" class="btn-primary">Open Assist Guide Again</a>
-    </div>
-  </section>
-
-  <section class="cta-section">
-    <h2>Ready to Play?</h2>
+<section class="email-section">
+  <div class="email-card">
+    <h2>Join the Email List</h2>
     <p>
-      3rd Eye Quest is built for game nights, spiritual circles, and anyone who wants to train perception in a fun way.
-      Bring curiosity. Leave overthinking.
+      Get launch updates, restock alerts, bonus rules, and advanced training add-ons.
     </p>
-    <a href="assist.html" class="btn-primary">Start with the Guide</a>
-    <a href="#how" class="btn-secondary" onclick="document.querySelector('.how-to-play').scrollIntoView({behavior:'smooth'})">See How It Works</a>
-  </section>
 
-  <footer>
-    © <span id="year"></span> 3rd Eye Quest • All rights reserved
-  </footer>
+    <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007bd8e3f0"
+          method="post"
+          target="_self"
+          novalidate>
 
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+      <div class="mc-row">
+        <input type="email"
+               name="EMAIL"
+               required
+               placeholder="Enter your email"
+               autocomplete="email" />
 
-    // --- Galaxy Starfield (lightweight canvas) ---
-    const canvas = document.getElementById("galaxy-canvas");
-    const hero = document.querySelector(".hero");
-    const ctx = canvas.getContext("2d");
+        <button type="submit">Notify Me</button>
+      </div>
 
-    let stars = [];
-    let raf = null;
+      <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
+      </div>
 
-    function resizeCanvas() {
-      const rect = hero.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(rect.width * dpr);
-      canvas.height = Math.floor(rect.height * dpr);
-      canvas.style.width = rect.width + "px";
-      canvas.style.height = rect.height + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      <p style="margin-top:15px; font-size:0.9rem; color:#8d99ae;">
+        No spam. Just the good stuff.
+      </p>
+    </form>
+  </div>
+</section>
 
-      // Re-seed stars on resize for consistent density
-      seedStars(rect.width, rect.height);
-    }
+<footer>
+  © <span id="year"></span> 3rd Eye Quest • All rights reserved
+</footer>
 
-    function seedStars(w, h) {
-      const count = Math.floor((w * h) / 6000); // density
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.3 + 0.2,
-        a: Math.random() * 0.8 + 0.15,
-        s: Math.random() * 0.35 + 0.05, // speed
-        tw: Math.random() * 0.02 + 0.005 // twinkle
-      }));
-    }
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
 
-    function drawNebula(w, h, t) {
-      // Soft moving glow blobs
-      const g1 = ctx.createRadialGradient(w*0.25, h*0.30, 0, w*0.25, h*0.30, Math.max(w,h)*0.65);
-      g1.addColorStop(0, "rgba(157,129,137,0.18)");
-      g1.addColorStop(1, "rgba(157,129,137,0.0)");
-      ctx.fillStyle = g1;
-      ctx.fillRect(0,0,w,h);
+// Galaxy star animation
+const canvas = document.getElementById("galaxy-canvas");
+const ctx = canvas.getContext("2d");
+let stars = [];
 
-      const cx = w*0.75 + Math.sin(t*0.0002)*60;
-      const cy = h*0.28 + Math.cos(t*0.00025)*50;
-      const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w,h)*0.55);
-      g2.addColorStop(0, "rgba(196,164,132,0.12)");
-      g2.addColorStop(1, "rgba(196,164,132,0.0)");
-      ctx.fillStyle = g2;
-      ctx.fillRect(0,0,w,h);
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = document.querySelector(".hero").offsetHeight;
+  stars = Array.from({length: 120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5,
+    s: Math.random() * 0.5
+  }));
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-      const cx3 = w*0.55 + Math.cos(t*0.00018)*70;
-      const cy3 = h*0.78 + Math.sin(t*0.00022)*55;
-      const g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, Math.max(w,h)*0.7);
-      g3.addColorStop(0, "rgba(120,90,255,0.10)");
-      g3.addColorStop(1, "rgba(120,90,255,0.0)");
-      ctx.fillStyle = g3;
-      ctx.fillRect(0,0,w,h);
-    }
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(star => {
+    star.y += star.s;
+    if(star.y > canvas.height) star.y = 0;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 
-    function render(t) {
-      const w = hero.clientWidth;
-      const h = hero.clientHeight;
-
-      ctx.clearRect(0, 0, w, h);
-
-      // Subtle background nebula glow
-      drawNebula(w, h, t);
-
-      // Stars
-      for (const st of stars) {
-        // drift downward slowly
-        st.y += st.s;
-        if (st.y > h + 10) {
-          st.y = -10;
-          st.x = Math.random() * w;
-        }
-
-        // twinkle
-        st.a += (Math.random() - 0.5) * st.tw;
-        if (st.a < 0.12) st.a = 0.12;
-        if (st.a > 0.95) st.a = 0.95;
-
-        ctx.beginPath();
-        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(237,242,244,${st.a})`;
-        ctx.fill();
-      }
-
-      raf = requestAnimationFrame(render);
-    }
-
-    // Motion accessibility
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    function start() {
-      cancelAnimationFrame(raf);
-      if (reduceMotion.matches) return; // no animation if user prefers reduced motion
-      raf = requestAnimationFrame(render);
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    reduceMotion.addEventListener?.("change", () => { resizeCanvas(); start(); });
-
-    resizeCanvas();
-    start();
-  </script>
 </body>
 </html>
