@@ -330,57 +330,24 @@ h1{
 
 .how-cta{ position:relative; z-index:1; margin-top:22px; }
 
-/* GALLERY */
+/* GALLERY (Carousel Only) */
 .gallery{
   padding:92px 20px;
   background:rgba(26,26,46,0.75);
   border-top:1px solid rgba(157,129,137,0.22);
 }
 
-.gallery-wrap{
-  max-width:980px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap:16px;
-  align-items:stretch;
-}
-
-.hero-shot{
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(43,45,66,0.55);
-}
-
-.hero-shot img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.mini-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-  .gallery-controls{
-  margin: 10px 0 30px;
-}
-
 .card-carousel{
-  max-width: 1000px;
-  margin: 30px auto 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid rgba(237,242,244,0.14);
-  background: rgba(43,45,66,0.35);
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  max-width:1000px;
+  margin:24px auto 0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:14px;
+  border-radius:18px;
+  border:1px solid rgba(237,242,244,0.14);
+  background:rgba(43,45,66,0.35);
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
 }
 
 .carousel-track{
@@ -389,40 +356,26 @@ h1{
 }
 
 .carousel-card{
-  flex: 0 0 auto;
-  width: 200px;
-  aspect-ratio: 2.5 / 3.5;
-  border-radius: 16px;
+  flex:0 0 auto;
+  width:200px;
+  aspect-ratio:2.5 / 3.5;
+  border-radius:16px;
   overflow:hidden;
-  border: 1px solid rgba(237,242,244,0.14);
-  background: rgba(26,26,46,0.55);
-  scroll-snap-align: start;
+  border:1px solid rgba(237,242,244,0.14);
+  background:rgba(26,26,46,0.55);
+  scroll-snap-align:start;
 }
 
 .carousel-card img{
   width:100%;
   height:100%;
-  object-fit: cover;
+  object-fit:cover;
   display:block;
-  transition: transform 0.3s ease;
+  transition:transform 0.3s ease;
 }
 
 .carousel-card:hover img{
-  transform: scale(1.05);
-}
-
-.mini{
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(43,45,66,0.55);
-}
-
-.mini img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+  transform:scale(1.05);
 }
 
 /* EMAIL */
@@ -496,11 +449,6 @@ footer{
   padding:56px 20px;
   font-size:0.9rem;
   color:#64748b;
-}
-
-@media (max-width: 820px){
-  .gallery-wrap{ grid-template-columns:1fr; }
-  .mini-grid{ grid-template-columns:1fr 1fr; }
 }
 
 @media (max-width: 420px){
@@ -605,38 +553,15 @@ footer{
 <section class="gallery" id="cards">
   <h2 class="section-title">See the Cards</h2>
   <p class="section-sub">
-    Real remote viewing targets across multiple decks. Scroll or shuffle for fresh samples.
+    A peek at real targets from the deck. Swipe / scroll to browse.
   </p>
 
-  <div class="gallery-controls">
-    <button class="btn-primary" type="button" id="shuffleCards">
-      Shuffle Preview
-    </button>
-  </div>
-
-  <!-- Featured area -->
-  <div class="gallery-wrap" id="featuredGrid">
-    <div class="hero-shot">
-      <img id="featured0" src="cards/000.png" alt="Featured card">
-    </div>
-
-    <div class="mini-grid">
-      <div class="mini"><img id="featured1" src="cards/003.png"></div>
-      <div class="mini"><img id="featured2" src="cards/006.png"></div>
-      <div class="mini"><img id="featured3" src="cards/010.png"></div>
-      <div class="mini"><img id="featured4" src="cards/067.png"></div>
-    </div>
-  </div>
-
-  <!-- Carousel -->
-  <div class="card-carousel">
+  <div class="card-carousel" aria-label="3rd Eye Quest card carousel">
     <div class="carousel-track" id="carouselTrack">
-      <!-- JS populates this -->
+      <!-- JS populates -->
     </div>
   </div>
-
 </section>
-
 
 <section class="email-section" id="email">
   <div class="email-card">
@@ -675,158 +600,141 @@ footer{
 </footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-// --- Galaxy Starfield (lightweight canvas) ---
-const canvas = document.getElementById("galaxy-canvas");
-const hero = document.querySelector(".hero");
-const ctx = canvas.getContext("2d");
-let stars = [];
-let raf = null;
+  // --- Galaxy Starfield (lightweight canvas) ---
+  const canvas = document.getElementById("galaxy-canvas");
+  const hero = document.querySelector(".hero");
+  const ctx = canvas.getContext("2d");
 
-function resizeCanvas(){
-  const rect = hero.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = Math.floor(rect.width * dpr);
-  canvas.height = Math.floor(rect.height * dpr);
-  canvas.style.width = rect.width + "px";
-  canvas.style.height = rect.height + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  seedStars(rect.width, rect.height);
-}
+  let stars = [];
+  let raf = null;
 
-function seedStars(w, h){
-  const count = Math.floor((w * h) / 6000);
-  stars = Array.from({ length: count }, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    r: Math.random() * 1.3 + 0.2,
-    a: Math.random() * 0.8 + 0.15,
-    s: Math.random() * 0.35 + 0.05,
-    tw: Math.random() * 0.02 + 0.005
-  }));
-}
-
-function drawNebula(w, h, t){
-  const g1 = ctx.createRadialGradient(w*0.25, h*0.30, 0, w*0.25, h*0.30, Math.max(w,h)*0.65);
-  g1.addColorStop(0, "rgba(157,129,137,0.18)");
-  g1.addColorStop(1, "rgba(157,129,137,0.0)");
-  ctx.fillStyle = g1;
-  ctx.fillRect(0,0,w,h);
-
-  const cx = w*0.75 + Math.sin(t*0.0002)*60;
-  const cy = h*0.28 + Math.cos(t*0.00025)*50;
-  const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w,h)*0.55);
-  g2.addColorStop(0, "rgba(196,164,132,0.12)");
-  g2.addColorStop(1, "rgba(196,164,132,0.0)");
-  ctx.fillStyle = g2;
-  ctx.fillRect(0,0,w,h);
-
-  const cx3 = w*0.55 + Math.cos(t*0.00018)*70;
-  const cy3 = h*0.78 + Math.sin(t*0.00022)*55;
-  const g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, Math.max(w,h)*0.7);
-  g3.addColorStop(0, "rgba(120,90,255,0.10)");
-  g3.addColorStop(1, "rgba(120,90,255,0.0)");
-  ctx.fillStyle = g3;
-  ctx.fillRect(0,0,w,h);
-}
-
-function render(t){
-  const w = hero.clientWidth;
-  const h = hero.clientHeight;
-
-  ctx.clearRect(0, 0, w, h);
-  drawNebula(w, h, t);
-
-  for(const st of stars){
-    st.y += st.s;
-    if(st.y > h + 10){
-      st.y = -10;
-      st.x = Math.random() * w;
-    }
-    st.a += (Math.random() - 0.5) * st.tw;
-    if(st.a < 0.12) st.a = 0.12;
-    if(st.a > 0.95) st.a = 0.95;
-
-    ctx.beginPath();
-    ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(237,242,244,${st.a})`;
-    ctx.fill();
+  function resizeCanvas(){
+    const rect = hero.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seedStars(rect.width, rect.height);
   }
 
-  raf = requestAnimationFrame(render);
-}
+  function seedStars(w, h){
+    const count = Math.floor((w * h) / 6000);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.3 + 0.2,
+      a: Math.random() * 0.8 + 0.15,
+      s: Math.random() * 0.35 + 0.05,
+      tw: Math.random() * 0.02 + 0.005
+    }));
+  }
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-function start(){
-  cancelAnimationFrame(raf);
-  if(reduceMotion.matches) return;
-  raf = requestAnimationFrame(render);
-}
+  function drawNebula(w, h, t){
+    const g1 = ctx.createRadialGradient(w*0.25, h*0.30, 0, w*0.25, h*0.30, Math.max(w,h)*0.65);
+    g1.addColorStop(0, "rgba(157,129,137,0.18)");
+    g1.addColorStop(1, "rgba(157,129,137,0.0)");
+    ctx.fillStyle = g1;
+    ctx.fillRect(0,0,w,h);
 
-window.addEventListener("resize", resizeCanvas);
-reduceMotion.addEventListener?.("change", () => { resizeCanvas(); start(); });
+    const cx = w*0.75 + Math.sin(t*0.0002)*60;
+    const cy = h*0.28 + Math.cos(t*0.00025)*50;
+    const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w,h)*0.55);
+    g2.addColorStop(0, "rgba(196,164,132,0.12)");
+    g2.addColorStop(1, "rgba(196,164,132,0.0)");
+    ctx.fillStyle = g2;
+    ctx.fillRect(0,0,w,h);
 
-resizeCanvas();
-start();
+    const cx3 = w*0.55 + Math.cos(t*0.00018)*70;
+    const cy3 = h*0.78 + Math.sin(t*0.00022)*55;
+    const g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, Math.max(w,h)*0.7);
+    g3.addColorStop(0, "rgba(120,90,255,0.10)");
+    g3.addColorStop(1, "rgba(120,90,255,0.0)");
+    ctx.fillStyle = g3;
+    ctx.fillRect(0,0,w,h);
+  }
+
+  function render(t){
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+
+    ctx.clearRect(0, 0, w, h);
+    drawNebula(w, h, t);
+
+    for(const st of stars){
+      st.y += st.s;
+      if(st.y > h + 10){
+        st.y = -10;
+        st.x = Math.random() * w;
+      }
+      st.a += (Math.random() - 0.5) * st.tw;
+      if(st.a < 0.12) st.a = 0.12;
+      if(st.a > 0.95) st.a = 0.95;
+
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(237,242,244,${st.a})`;
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(render);
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function start(){
+    cancelAnimationFrame(raf);
+    if(reduceMotion.matches) return;
+    raf = requestAnimationFrame(render);
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  reduceMotion.addEventListener?.("change", () => { resizeCanvas(); start(); });
+
   resizeCanvas();
-start();
+  start();
 
-/* --- Card Carousel + Shuffle --- */
+  // --- Card Carousel (only uses the images you uploaded) ---
+  // If you upload more card PNGs, add their filenames here.
+  const cardFiles = [
+    "000.png",
+    "003.png",
+    "006.png",
+    "010.png",
+    "067.png",
+    "068.png",
+    "069.png",
+    "070.png",
+    "083.png",
+    "084.png",
+    "085.png",
+    "087.png"
+  ];
 
-const cardFiles = [
-  "000.png",
-  "003.png",
-  "006.png",
-  "010.png",
-  "067.png",
-  "068.png",
-  "069.png",
-  "070.png",
-  "083.png",
-  "084.png",
-  "085.png",
-  "087.png"
-];
+  function buildCarousel(){
+    const track = document.getElementById("carouselTrack");
+    if(!track) return;
 
-function randomSelection(arr, count){
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
+    track.innerHTML = "";
+    cardFiles.forEach(file => {
+      const card = document.createElement("div");
+      card.className = "carousel-card";
 
-function setFeaturedCards(){
-  const picks = randomSelection(cardFiles, 5);
-  for(let i=0;i<5;i++){
-    const img = document.getElementById(`featured${i}`);
-    if(img){
-      img.src = "cards/" + picks[i];
-    }
+      const img = document.createElement("img");
+      img.src = "cards/" + file;
+      img.alt = "3rd Eye Quest Card";
+      img.loading = "lazy";
+
+      card.appendChild(img);
+      track.appendChild(card);
+    });
   }
-}
 
-function buildCarousel(){
-  const track = document.getElementById("carouselTrack");
-  if(!track) return;
-  track.innerHTML = "";
-
-  cardFiles.forEach(file => {
-    const card = document.createElement("div");
-    card.className = "carousel-card";
-
-    const img = document.createElement("img");
-    img.src = "cards/" + file;
-    img.alt = "3rd Eye Quest Card";
-
-    card.appendChild(img);
-    track.appendChild(card);
-  });
-}
-
-document.getElementById("shuffleCards").addEventListener("click", setFeaturedCards);
-
-setFeaturedCards();
-buildCarousel();
-
+  buildCarousel();
 </script>
+
 </body>
 </html>
