@@ -366,6 +366,51 @@ h1{
   gap:16px;
 }
 
+  .gallery-controls{
+  margin: 10px 0 30px;
+}
+
+.card-carousel{
+  max-width: 1000px;
+  margin: 30px auto 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(237,242,244,0.14);
+  background: rgba(43,45,66,0.35);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-track{
+  display:flex;
+  gap:16px;
+}
+
+.carousel-card{
+  flex: 0 0 auto;
+  width: 200px;
+  aspect-ratio: 2.5 / 3.5;
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid rgba(237,242,244,0.14);
+  background: rgba(26,26,46,0.55);
+  scroll-snap-align: start;
+}
+
+.carousel-card img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  transition: transform 0.3s ease;
+}
+
+.carousel-card:hover img{
+  transform: scale(1.05);
+}
+
 .mini{
   border-radius:16px;
   overflow:hidden;
@@ -560,32 +605,38 @@ footer{
 <section class="gallery" id="cards">
   <h2 class="section-title">See the Cards</h2>
   <p class="section-sub">
-    Real remote viewing targets across multiple decks. Every round trains perception.
+    Real remote viewing targets across multiple decks. Scroll or shuffle for fresh samples.
   </p>
 
-  <div class="gallery-wrap">
+  <div class="gallery-controls">
+    <button class="btn-primary" type="button" id="shuffleCards">
+      Shuffle Preview
+    </button>
+  </div>
 
+  <!-- Featured area -->
+  <div class="gallery-wrap" id="featuredGrid">
     <div class="hero-shot">
-      <img src="cards/000.png" alt="3rd Eye Quest Card Example" loading="lazy">
+      <img id="featured0" src="cards/000.png" alt="Featured card">
     </div>
 
     <div class="mini-grid">
-      <div class="mini">
-        <img src="cards/003.png" alt="Card Example" loading="lazy">
-      </div>
-      <div class="mini">
-        <img src="cards/006.png" alt="Card Example" loading="lazy">
-      </div>
-      <div class="mini">
-        <img src="cards/010.png" alt="Card Example" loading="lazy">
-      </div>
-      <div class="mini">
-        <img src="cards/067.png" alt="Card Example" loading="lazy">
-      </div>
+      <div class="mini"><img id="featured1" src="cards/003.png"></div>
+      <div class="mini"><img id="featured2" src="cards/006.png"></div>
+      <div class="mini"><img id="featured3" src="cards/010.png"></div>
+      <div class="mini"><img id="featured4" src="cards/067.png"></div>
     </div>
-
   </div>
+
+  <!-- Carousel -->
+  <div class="card-carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- JS populates this -->
+    </div>
+  </div>
+
 </section>
+
 
 <section class="email-section" id="email">
   <div class="email-card">
@@ -718,6 +769,25 @@ reduceMotion.addEventListener?.("change", () => { resizeCanvas(); start(); });
 
 resizeCanvas();
 start();
+  resizeCanvas();
+start();
+
+/* --- Card Carousel + Shuffle --- */
+
+const cardFiles = [
+  "000.png",
+  "003.png",
+  "006.png",
+  ...
+];
+
+// all the new functions here
+
+setFeaturedCards();
+buildCarousel();
+
+</script>
+
 </script>
 
 </body>
