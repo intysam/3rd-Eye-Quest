@@ -198,7 +198,49 @@
     body.advanced-on .advanced {
       display: block;
     }
+/* BUTTON WRAPPER */
+.assist-controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
 
+/* START BUTTON */
+.btn-start {
+  background: linear-gradient(135deg, #c4a484, #9d8189);
+  color: #1a1a2e;
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 18px 40px;
+  border-radius: 999px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(196,164,132,0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(196,164,132,0.5);
+}
+
+/* RESET BUTTON */
+.btn-reset {
+  background: rgba(237,242,244,0.08);
+  color: #edf2f4;
+  font-size: 1.1rem;
+  padding: 16px 36px;
+  border-radius: 999px;
+  border: 2px solid rgba(237,242,244,0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-reset:hover {
+  border-color: #c4a484;
+  transform: translateY(-1px);
+}
+    
     /* GRID */
     .assist-grid {
       display: grid;
@@ -306,6 +348,11 @@
       </div>
     </div>
 
+    <div class="assist-controls">
+  <button class="btn-start" onclick="startTimer()">Start Round</button>
+  <button class="btn-reset" onclick="resetSession()">Reset</button>
+</div>
+    
     <!-- ADVANCED TOGGLE -->
     <div class="advanced-toggle">
       <label>
