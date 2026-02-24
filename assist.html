@@ -77,76 +77,164 @@
       color: #cbd5e0;
     }
 
-    /* TIMER */
-    .timer-box {
-      background: rgba(196, 164, 132, 0.08);
-      border: 1px solid rgba(196, 164, 132, 0.4);
-      border-radius: 14px;
-      padding: 18px;
+    /* TIMER PANEL (clean + dominant) */
+    .timer-panel{
+      margin-top: 8px;
+      padding: 26px 18px 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(237,242,244,0.14);
+      background: rgba(43,45,66,0.55);
       text-align: center;
-      margin-bottom: 16px;
     }
 
-    .timer-display {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+    .timer-display{
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      margin-bottom: 14px;
       color: var(--quest-gold);
-      margin-bottom: 12px;
     }
 
-    .timer-controls {
+    .timer-actions{
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 16px;
       justify-content: center;
+      flex-wrap: wrap;
       margin-bottom: 10px;
     }
 
-    .timer-controls button {
-      background: transparent;
-      color: var(--quest-pink);
-      border: 2px solid var(--quest-pink);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 700;
+    /* BIG START BUTTON */
+    .btn-start{
+      background: linear-gradient(135deg, #c4a484, #9d8189);
+      color: #1a1a2e;
+      font-size: 1.2rem;
+      font-weight: 900;
+      padding: 18px 46px;
+      border-radius: 999px;
+      border: none;
+      box-shadow: 0 12px 34px rgba(196,164,132,0.35);
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .timer-controls button:hover {
-      background: var(--quest-pink);
-      color: var(--quest-dark);
+    .btn-start:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 44px rgba(196,164,132,0.5);
     }
 
-    .timer-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-      color: #8d99ae;
-      font-size: 0.85rem;
+    /* BIG RESET BUTTON */
+    .btn-reset{
+      background: rgba(237,242,244,0.08);
+      color: #edf2f4;
+      font-size: 1.1rem;
+      padding: 16px 40px;
+      border-radius: 999px;
+      border: 2px solid rgba(237,242,244,0.18);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .btn-reset:hover{
+      border-color: rgba(196,164,132,0.55);
+      transform: translateY(-1px);
+    }
+
+    .timer-subline{
+      color:#9aa7bf;
+      font-size: 0.92rem;
       margin-top: 6px;
     }
 
-    .timer-meta label {
-      cursor: pointer;
-      user-select: none;
+    .chime-toggle{
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
+      gap: 10px;
+      margin: 12px auto 0;
+      color: #cbd5e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 12px;
       border-radius: 999px;
       border: 1px solid rgba(157, 129, 137, 0.25);
       background: rgba(157, 129, 137, 0.06);
     }
 
-    .timer-meta input {
-      transform: scale(1.08);
+    .chime-toggle input{ transform: scale(1.08); }
+
+    /* Advanced timer dropdown */
+    .advanced-timer{
+      max-width: 680px;
+      margin: 16px auto 0;
+      text-align: left;
+      color: #cbd5e0;
     }
 
-    .timer-box.finished .timer-display {
+    .advanced-timer summary{
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px dashed rgba(157,129,137,0.35);
+      background: rgba(26,26,46,0.35);
+      font-weight: 800;
+      color: var(--quest-pink);
+    }
+
+    .advanced-timer summary::-webkit-details-marker{ display:none; }
+
+    .advanced-inner{
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill{
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(237,242,244,0.18);
+      background: rgba(237,242,244,0.06);
+      color: #edf2f4;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .pill:hover{ transform: translateY(-1px); }
+
+    .pill.active{
+      border-color: rgba(196,164,132,0.8);
+      background: rgba(196,164,132,0.18);
+    }
+
+    .custom-time{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    .custom-time label{
+      font-size: 0.85rem;
+      color: #9aa7bf;
+      font-weight: 700;
+    }
+
+    .custom-time input{
+      width: 120px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(237,242,244,0.18);
+      background: rgba(26,26,46,0.55);
+      color: #edf2f4;
+      outline: none;
+    }
+
+    .timer-panel.finished .timer-display {
       animation: pulse 1s ease-in-out infinite;
     }
 
@@ -155,6 +243,9 @@
       50% { opacity: 0.4; }
       100% { opacity: 1; }
     }
+
+    /* MORE SPACE before Advanced Viewer Mode */
+    .spacer-lg { height: 26px; }
 
     /* Advanced toggle */
     .advanced-toggle {
@@ -167,7 +258,7 @@
     }
 
     .advanced-toggle label {
-      font-weight: 800;
+      font-weight: 900;
       color: var(--quest-pink);
       cursor: pointer;
       user-select: none;
@@ -198,49 +289,7 @@
     body.advanced-on .advanced {
       display: block;
     }
-/* BUTTON WRAPPER */
-.assist-controls {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 24px;
-}
 
-/* START BUTTON */
-.btn-start {
-  background: linear-gradient(135deg, #c4a484, #9d8189);
-  color: #1a1a2e;
-  font-size: 1.2rem;
-  font-weight: 900;
-  padding: 18px 40px;
-  border-radius: 999px;
-  border: none;
-  box-shadow: 0 10px 30px rgba(196,164,132,0.35);
-  transition: all 0.25s ease;
-}
-
-.btn-start:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(196,164,132,0.5);
-}
-
-/* RESET BUTTON */
-.btn-reset {
-  background: rgba(237,242,244,0.08);
-  color: #edf2f4;
-  font-size: 1.1rem;
-  padding: 16px 36px;
-  border-radius: 999px;
-  border: 2px solid rgba(237,242,244,0.2);
-  transition: all 0.25s ease;
-}
-
-.btn-reset:hover {
-  border-color: #c4a484;
-  transform: translateY(-1px);
-}
-    
     /* GRID */
     .assist-grid {
       display: grid;
@@ -292,7 +341,7 @@
 
     .label {
       color: var(--quest-gold);
-      font-weight: 800;
+      font-weight: 900;
       display: block;
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -309,8 +358,10 @@
 
     @media (max-width: 420px) {
       .probe-card { padding: 18px; }
-      .timer-display { font-size: 2.3rem; }
+      .timer-display { font-size: 2.4rem; }
       li { font-size: 0.93rem; }
+      .btn-start { width: min(320px, 92vw); }
+      .btn-reset { width: min(240px, 92vw); }
     }
   </style>
 </head>
@@ -328,31 +379,40 @@
       "Relax your mind, describe don't define, and trust your first signal."
     </div>
 
-    <!-- TIMER -->
-    <div class="timer-box" id="timerBox">
-      <div class="timer-display" id="timerDisplay">00:30</div>
+    <!-- TIMER (simple default + hidden options) -->
+    <div class="timer-panel finished-off" id="timerBox">
+      <div class="timer-display" id="timerDisplay">01:30</div>
 
-      <div class="timer-controls">
-        <button type="button" data-time="30">30s</button>
-        <button type="button" data-time="60">60s</button>
-        <button type="button" data-time="90">90s</button>
-        <button type="button" id="startPause">Start</button>
-        <button type="button" id="reset">Reset</button>
+      <div class="timer-actions">
+        <button class="btn-start" id="startBtn" type="button">Start Round</button>
+        <button class="btn-reset" id="resetBtn" type="button">Reset</button>
       </div>
 
-      <div class="timer-meta">
-        <label title="Plays a soft chime when the timer ends">
-          <input type="checkbox" id="chimeToggle" checked />
-          Soft chime
-        </label>
-      </div>
+      <div class="timer-subline">Standard Round — 90 seconds</div>
+
+      <label class="chime-toggle" title="Plays a soft chime when the timer ends">
+        <input type="checkbox" id="chimeToggle" checked />
+        Soft chime
+      </label>
+
+      <details class="advanced-timer">
+        <summary>Advanced timer options</summary>
+        <div class="advanced-inner">
+          <button class="pill" type="button" data-seconds="60">60s</button>
+          <button class="pill active" type="button" data-seconds="90">90s</button>
+          <button class="pill" type="button" data-seconds="120">120s</button>
+
+          <div class="custom-time">
+            <label for="customSeconds">Custom</label>
+            <input id="customSeconds" type="number" min="10" max="600" step="5" placeholder="90">
+            <button class="pill" id="setCustom" type="button">Set</button>
+          </div>
+        </div>
+      </details>
     </div>
 
-    <div class="assist-controls">
-  <button class="btn-start" onclick="startTimer()">Start Round</button>
-  <button class="btn-reset" onclick="resetSession()">Reset</button>
-</div>
-    
+    <div class="spacer-lg"></div>
+
     <!-- ADVANCED TOGGLE -->
     <div class="advanced-toggle">
       <label>
@@ -611,37 +671,29 @@
 
     // -------------------------
     // Soft chime (Web Audio)
-    // - Must be triggered after a user gesture (Start button click counts).
     // -------------------------
     let audioCtx = null;
 
     function ensureAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
       return audioCtx;
     }
 
     function playChime() {
-      const chimeOn = document.getElementById("chimeToggle").checked;
+      const chimeOn = document.getElementById("chimeToggle")?.checked;
       if (!chimeOn) return;
 
       const ctx = ensureAudioContext();
-
-      // Two layered sines for a gentle bell-ish shimmer
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc1.type = "sine";
       osc2.type = "sine";
-      osc1.frequency.value = 528;  // pleasant base
-      osc2.frequency.value = 792;  // light harmony
+      osc1.frequency.value = 528;
+      osc2.frequency.value = 792;
 
-      // Very soft envelope
       gain.gain.setValueAtTime(0.0001, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + 0.05);
       gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.25);
@@ -657,17 +709,16 @@
     }
 
     // -------------------------
-    // Timer logic
+    // Timer logic (default 90s, options hidden)
     // -------------------------
-    let totalTime = 30;
-    let remaining = totalTime;
+    let totalSeconds = 90;
+    let remaining = totalSeconds;
     let interval = null;
-    let running = false;
 
-    const display = document.getElementById("timerDisplay");
-    const startPauseBtn = document.getElementById("startPause");
-    const resetBtn = document.getElementById("reset");
     const timerBox = document.getElementById("timerBox");
+    const display = document.getElementById("timerDisplay");
+    const startBtn = document.getElementById("startBtn");
+    const resetBtn = document.getElementById("resetBtn");
 
     function formatTime(seconds) {
       const m = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -679,58 +730,75 @@
       display.textContent = formatTime(remaining);
     }
 
+    function stopTimer() {
+      clearInterval(interval);
+      interval = null;
+      startBtn.textContent = "Start Round";
+    }
+
+    function resetTimer() {
+      stopTimer();
+      remaining = totalSeconds;
+      timerBox.classList.remove("finished");
+      updateDisplay();
+    }
+
     function startTimer() {
-      // user gesture -> unlock audio context
       ensureAudioContext();
 
       if (interval) return;
-      running = true;
-      startPauseBtn.textContent = "Pause";
+      timerBox.classList.remove("finished");
+      startBtn.textContent = "Running…";
 
       interval = setInterval(() => {
-        remaining--;
+        remaining -= 1;
         updateDisplay();
 
         if (remaining <= 0) {
-          clearInterval(interval);
-          interval = null;
-          running = false;
+          stopTimer();
+          remaining = 0;
+          updateDisplay();
           timerBox.classList.add("finished");
-          startPauseBtn.textContent = "Start";
           playChime();
         }
       }, 1000);
     }
 
-    function pauseTimer() {
-      clearInterval(interval);
-      interval = null;
-      running = false;
-      startPauseBtn.textContent = "Start";
-    }
+    startBtn.addEventListener("click", startTimer);
+    resetBtn.addEventListener("click", resetTimer);
 
-    startPauseBtn.addEventListener("click", () => {
-      if (!running) startTimer();
-      else pauseTimer();
-    });
-
-    resetBtn.addEventListener("click", () => {
-      pauseTimer();
-      remaining = totalTime;
-      timerBox.classList.remove("finished");
-      updateDisplay();
-    });
-
-    document.querySelectorAll("[data-time]").forEach(btn => {
+    // Advanced pill options
+    document.querySelectorAll(".pill[data-seconds]").forEach(btn => {
       btn.addEventListener("click", () => {
-        pauseTimer();
-        totalTime = parseInt(btn.dataset.time, 10);
-        remaining = totalTime;
+        const sec = Number(btn.dataset.seconds);
+        if (!Number.isFinite(sec)) return;
+
+        totalSeconds = sec;
+        remaining = sec;
+        stopTimer();
         timerBox.classList.remove("finished");
         updateDisplay();
+
+        document.querySelectorAll(".pill[data-seconds]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
       });
     });
 
+    // Custom set
+    document.getElementById("setCustom")?.addEventListener("click", () => {
+      const val = Number(document.getElementById("customSeconds")?.value);
+      if (!Number.isFinite(val) || val < 10 || val > 600) return;
+
+      totalSeconds = Math.round(val);
+      remaining = totalSeconds;
+      stopTimer();
+      timerBox.classList.remove("finished");
+      updateDisplay();
+
+      document.querySelectorAll(".pill[data-seconds]").forEach(b => b.classList.remove("active"));
+    });
+
+    // init
     updateDisplay();
   </script>
 </body>
