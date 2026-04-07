@@ -1,631 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>3rd Eye Quest | The Remote Viewing Card Game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/x-icon" href="favicon.ico" />
-
-<meta name="description" content="3rd Eye Quest is a remote viewing card game designed to train perception, intuition, and signal-reading through structured play." />
-<meta property="og:title" content="3rd Eye Quest | The Remote Viewing Card Game" />
-<meta property="og:description" content="A remote viewing game disguised as a party card game — train signal over noise in fast, structured rounds." />
-<meta property="og:image" content="box-front.png" />
-
-<script id="mcjs">
-!function(c,h,i,m,p){
-  m=c.createElement(h),
-  p=c.getElementsByTagName(h)[0],
-  m.async=1,
-  m.src=i,
-  p.parentNode.insertBefore(m,p)
-}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a00d9ac7897706f6ee8f12932/8eecba87921f2bde24de07b3b.js");
-</script>
+<title>3rd Eye Quest</title>
 
 <style>
-:root{
-  --quest-pink:#9d8189;
-  --quest-dark:#1a1a2e;
-  --quest-card:#2b2d42;
-  --quest-text:#edf2f4;
-  --quest-gold:#c4a484;
-  --quest-panel:rgba(11,15,29,0.68);
-  --quest-panel-border:rgba(237,242,244,0.10);
+:root {
+  --glass: rgba(20, 20, 35, 0.55);
+  --text: #f5f5f5;
+  --accent: #c4a484;
 }
 
-*{ box-sizing:border-box; }
-
-html{ scroll-behavior:smooth; }
-
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:var(--quest-dark);
-  color:var(--quest-text);
-  margin:0;
-  text-align:center;
-  overflow-x:hidden;
-}
-
-a{ color:inherit; }
-
-.section-title{
-  color:var(--quest-pink);
-  text-transform:uppercase;
-  letter-spacing:0.10em;
-  font-size:clamp(1.6rem, 4vw, 2.2rem);
-  margin:0 0 14px;
-}
-
-.section-sub{
-  color:#cbd5e0;
-  max-width:70ch;
-  margin:0 auto 26px;
-  line-height:1.7;
-}
-
-.btn-primary{
-  background:transparent;
-  color:var(--quest-pink);
-  border:2px solid var(--quest-pink);
-  padding:14px 24px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  transition:all 0.25s ease;
-  display:inline-block;
-}
-
-.btn-primary:hover{
-  background:var(--quest-pink);
-  color:var(--quest-dark);
-  transform:translateY(-1px);
-}
-
-.btn-secondary{
-  background:rgba(237,242,244,0.06);
-  color:var(--quest-text);
-  border:1px solid rgba(237,242,244,0.18);
-  padding:14px 22px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:700;
-  display:inline-block;
-  transition:all 0.25s ease;
-}
-
-.btn-secondary:hover{
-  border-color:rgba(196,164,132,0.55);
-  transform:translateY(-1px);
-}
-
-/* HERO */
-.hero{
-  position:relative;
-  min-height:100vh;
-  overflow:hidden;
-  isolation:isolate;
-  background:
-    radial-gradient(900px 600px at 18% 20%, rgba(157,129,137,0.15) 0%, rgba(157,129,137,0) 60%),
-    radial-gradient(800px 500px at 82% 26%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 62%),
-    radial-gradient(900px 700px at 55% 78%, rgba(74,84,180,0.18) 0%, rgba(74,84,180,0) 72%),
-    linear-gradient(180deg, #0d1122 0%, #090d18 100%);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg, rgba(5,8,18,0.25) 0%, rgba(5,8,18,0.06) 40%, rgba(5,8,18,0.0) 100%);
-  pointer-events:none;
-  z-index:0;
-}
-
-.hero-shell{
-  position:relative;
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:minmax(0, 1fr) 360px;
-  align-items:center;
-  gap:24px;
-  padding:28px 28px 28px 40px;
-  z-index:1;
-}
-
-.star-field{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-
-.star{
-  position:absolute;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.9);
-  box-shadow:0 0 8px rgba(255,255,255,0.30);
-  opacity:0.5;
-  animation:floatStar linear infinite;
-}
-
-.star.small{
-  width:2px;
-  height:2px;
-  opacity:0.35;
-}
-
-.star.medium{
-  width:4px;
-  height:4px;
-  opacity:0.55;
-}
-
-.star.large{
-  width:6px;
-  height:6px;
-  opacity:0.28;
-}
-
-@keyframes floatStar{
-  0%{ transform:translateY(0px); }
-  50%{ transform:translateY(-18px); }
-  100%{ transform:translateY(0px); }
-}
-
-.hero-main{
-  position:relative;
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1;
-}
-
-.hero-glow{
-  position:absolute;
-  width:min(700px, 58vw);
-  height:min(700px, 58vw);
-  border-radius:50%;
-  background:
-    radial-gradient(circle, rgba(157,129,137,0.17) 0%, rgba(157,129,137,0.07) 34%, rgba(157,129,137,0) 72%);
-  filter:blur(24px);
-  pointer-events:none;
-}
-
-.hero-art{
-  position:relative;
- width:min(700px, 58vw);
-  max-width:100%;
-  transition:transform 0.18s ease-out;
-  will-change:transform;
-}
-
-.hero-art img{
-  width:100%;
-  height:auto;
-  display:block;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.45));
-}
-
-.hero-panel{
-  position:relative;
-  z-index:2;
-  align-self:stretch;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.panel-card{
-  width:100%;
-  max-width:360px;
-  background:var(--quest-panel);
-  border:1px solid var(--quest-panel-border);
-  border-radius:28px;
-  padding:24px 22px;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 24px 70px rgba(0,0,0,0.30);
-  text-align:left;
-}
-
-.logo-img{
-  width:64px;
-  height:auto;
-  margin-bottom:16px;
-  filter:drop-shadow(0 0 10px rgba(157,129,137,0.28));
-}
-
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  padding:8px 14px;
-  border-radius:999px;
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(237,242,244,0.04);
-  color:#dbe2ee;
-  text-transform:uppercase;
-  letter-spacing:0.14em;
-  font-size:0.70rem;
-  font-weight:800;
-  margin-bottom:18px;
-}
-
-.hero-title{
-  font-size:clamp(2.4rem, 4vw, 4rem);
-  color:var(--quest-pink);
-  margin:0 0 10px;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  line-height:0.93;
-  text-shadow:0 0 16px rgba(157,129,137,0.16);
-}
-
-.tagline{
-  font-size:1.1rem;
-  color:#d6deea;
-  margin:0 0 12px;
-  font-style:italic;
-  line-height:1.35;
-}
-
-.subtag{
-  font-size:0.98rem;
-  color:#b7c4d7;
-  margin:0 0 24px;
-  line-height:1.7;
-}
-
-.subtag strong{
-  color:var(--quest-gold);
-}
-
-.panel-nav{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.panel-nav .btn-primary,
-.panel-nav .btn-secondary{
-  width:100%;
-  text-align:center;
-}
-
-.panel-divider{
-  height:1px;
-  background:linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.14), rgba(255,255,255,0.0));
-  margin:18px 0;
-}
-
-.micro-copy{
-  font-size:0.92rem;
-  color:#a7b4c8;
-  margin:0 0 14px;
-  line-height:1.6;
-}
-
-.badges{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-}
-
-.badge{
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(26,26,46,0.38);
-  padding:8px 12px;
-  border-radius:999px;
-  color:#d5dcea;
-  font-size:0.82rem;
-}
-
-.panel-footer{
-  margin-top:18px;
-  color:#8d99ae;
-  font-size:0.82rem;
-  line-height:1.6;
-}
-
-/* INFO */
-.info{
-  padding:86px 20px;
-  background:rgba(43,45,66,0.92);
-  position:relative;
-  overflow:hidden;
-}
-
-.info::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:
-    radial-gradient(520px 420px at 20% 20%, rgba(157,129,137,0.14) 0%, rgba(157,129,137,0) 60%),
-    radial-gradient(520px 420px at 80% 80%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 65%);
-  filter:blur(22px);
-  opacity:0.85;
-  pointer-events:none;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.cards3{
-  position:relative;
-  z-index:1;
-  max-width:980px;
-  margin:30px auto 0;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  gap:16px;
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
 }
 
-.feature{
-  text-align:left;
-  background:rgba(26,26,46,0.55);
-  border:1px solid rgba(237,242,244,0.14);
-  border-top:4px solid var(--quest-pink);
-  border-radius:16px;
-  padding:20px 18px;
+/* BACKGROUND IMAGE */
+.bg {
+  position: fixed;
+  inset: 0;
+  background: url('space-bg.png') center/cover no-repeat;
+  z-index: -2;
 }
 
-.feature h3{
-  margin:0 0 8px;
-  color:var(--quest-pink);
-  letter-spacing:0.02em;
+/* DARK GRADIENT OVERLAY (for readability) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.75));
+  z-index: -1;
 }
 
-.feature p{
-  margin:0;
-  color:#cbd5e0;
-  line-height:1.65;
-}
-
-/* HOW TO PLAY */
-.how{
-  padding:92px 20px;
-  background:var(--quest-card);
-  position:relative;
-  overflow:hidden;
-}
-
-.how::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:
-    radial-gradient(520px 420px at 10% 15%, rgba(157,129,137,0.14) 0%, rgba(157,129,137,0) 60%),
-    radial-gradient(520px 420px at 90% 85%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 65%);
-  filter:blur(20px);
-  opacity:0.85;
-  pointer-events:none;
-}
-
-.step{
-  position:relative;
-  z-index:1;
-  max-width:760px;
-  margin:0 auto 46px;
-  text-align:left;
-  border-left:4px solid var(--quest-pink);
-  padding-left:26px;
-}
-
-.step h3{
-  margin:0 0 8px;
-  color:var(--quest-pink);
-  font-size:1.4rem;
-}
-
-.step p{
-  margin:0;
-  color:#cbd5e0;
-  line-height:1.75;
-  font-size:1.05rem;
-}
-
-.quote{
-  position:relative;
-  z-index:1;
-  color:#8d99ae;
-  font-style:italic;
-  margin-top:26px;
-}
+/* RIGHT SIDE PANEL */
+.panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 320px;
 
-.how-cta{
-  position:relative;
-  z-index:1;
-  margin-top:22px;
-}
-
-/* GALLERY */
-.gallery{
-  padding:92px 20px;
-  background:rgba(26,26,46,0.75);
-  border-top:1px solid rgba(157,129,137,0.22);
-}
-
-.card-carousel{
-  max-width:1000px;
-  margin:24px auto 0;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding:14px;
-  border-radius:18px;
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(43,45,66,0.35);
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-}
-
-.carousel-track{
-  display:flex;
-  gap:16px;
-}
+  backdrop-filter: blur(16px);
+  background: var(--glass);
 
-.carousel-card{
-  flex:0 0 auto;
-  width:200px;
-  height:290px;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid rgba(237,242,244,0.14);
-  background:rgba(26,26,46,0.55);
-  scroll-snap-align:start;
-}
+  padding: 50px 30px;
 
-.carousel-card img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  display:block;
-  transition:transform 0.3s ease;
-  background:rgba(26,26,46,0.35);
-}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 
-.carousel-card:hover img{
-  transform:scale(1.05);
+  border-left: 1px solid rgba(255,255,255,0.08);
 }
 
-.community{
-  padding:92px 20px;
-  background:rgba(43,45,66,0.85);
-  border-top:1px solid rgba(157,129,137,0.22);
+/* TITLE */
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 
-/* EMAIL */
-.email-section{
-  padding:92px 20px;
-  background:
-    radial-gradient(900px 500px at 50% 10%, rgba(196,164,132,0.12) 0%, rgba(26,26,46,0) 60%),
-    rgba(26,26,46,0.6);
-  border-top:1px solid rgba(157,129,137,0.22);
+.subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 25px;
 }
 
-.email-card{
-  max-width:780px;
-  margin:0 auto;
-  background:rgba(43,45,66,0.65);
-  border:1px solid rgba(237,242,244,0.14);
-  border-radius:18px;
-  padding:34px 22px;
-  box-shadow:0 24px 60px rgba(0,0,0,0.35);
-}
+/* BUTTONS */
+.btn {
+  padding: 14px;
+  border-radius: 999px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
 
-.mc-row{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
+  border: 1px solid rgba(255,255,255,0.25);
 
-.mc-row input[type="email"]{
-  width:min(420px, 92vw);
-  padding:14px 16px;
-  border-radius:999px;
-  border:1px solid rgba(237,242,244,0.22);
-  background:rgba(26,26,46,0.55);
-  color:var(--quest-text);
-  outline:none;
-  font-size:1rem;
+  transition: all 0.3s ease;
 }
 
-.mc-row input[type="email"]::placeholder{
-  color:rgba(154,167,191,0.85);
+/* BUTTON HOVER */
+.btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
 }
 
-.mc-row button{
-  padding:14px 24px;
-  border-radius:999px;
-  border:2px solid var(--quest-gold);
-  background:rgba(196,164,132,0.12);
-  color:var(--quest-text);
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  cursor:pointer;
-  transition:all 0.25s ease;
-}
+/* CENTER AREA */
+.center {
+  position: absolute;
+  left: 0;
+  right: 320px;
+  top: 0;
+  bottom: 0;
 
-.mc-row button:hover{
-  background:var(--quest-gold);
-  color:var(--quest-dark);
-  transform:translateY(-1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.fineprint{
-  margin-top:12px;
-  color:#8d99ae;
-  font-size:0.88rem;
-}
+/* MAIN TITLE FLOAT */
+.center h1 {
+  font-size: 54px;
+  letter-spacing: 6px;
+  opacity: 0.9;
+  text-align: center;
 
-/* FOOTER */
-footer{
-  padding:56px 20px;
-  font-size:0.9rem;
-  color:#64748b;
+  text-shadow: 0 0 30px rgba(0,0,0,0.6);
 }
 
 /* MOBILE */
-@media (max-width: 980px){
-  .hero-shell{
-    grid-template-columns:1fr;
-    gap:20px;
-    padding:20px 20px 36px;
+@media (max-width: 768px) {
+
+  .panel {
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: auto;
+    flex-direction: row;
+    overflow-x: auto;
   }
 
-  .hero-main{
-    min-height:auto;
-    padding-top:30px;
-    order:1;
+  .center {
+    right: 0;
   }
 
-  .hero-panel{
-    order:2;
-  }
-
-  .panel-card{
-    max-width:none;
-  }
-
-  .hero-art{
-    width:min(460px, 82vw);
-  }
-
-  .hero-glow{
-    width:min(520px, 82vw);
-    height:min(520px, 82vw);
-  }
-}
-
-@media (max-width: 700px){
-  .hero-title{
-    font-size:clamp(2.2rem, 11vw, 3.6rem);
-  }
-
-  .tagline{
-    font-size:1.02rem;
-  }
-
-  .subtag{
-    font-size:0.96rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior:auto; }
-  .hero-art,
-  .btn-primary,
-  .btn-secondary,
-  .carousel-card img{
-    transition:none;
-  }
-  .star{
-    animation:none !important;
+  .center h1 {
+    font-size: 34px;
   }
 }
 </style>
@@ -633,255 +144,27 @@ footer{
 
 <body>
 
-<section class="hero" id="hero">
-  <div class="star-field" aria-hidden="true">
-    <div class="star small" style="top:8%; left:8%; animation-duration:14s;"></div>
-    <div class="star medium" style="top:16%; left:24%; animation-duration:20s;"></div>
-    <div class="star small" style="top:34%; left:12%; animation-duration:18s;"></div>
-    <div class="star large" style="top:62%; left:20%; animation-duration:26s;"></div>
-    <div class="star small" style="top:82%; left:10%; animation-duration:17s;"></div>
-    <div class="star medium" style="top:10%; left:56%; animation-duration:24s;"></div>
-    <div class="star small" style="top:26%; left:68%; animation-duration:19s;"></div>
-    <div class="star medium" style="top:58%; left:72%; animation-duration:23s;"></div>
-    <div class="star small" style="top:80%; left:64%; animation-duration:18s;"></div>
-    <div class="star large" style="top:18%; right:18%; animation-duration:28s;"></div>
-    <div class="star small" style="top:34%; right:10%; animation-duration:16s;"></div>
-    <div class="star medium" style="top:74%; right:18%; animation-duration:21s;"></div>
-  </div>
+<!-- BACKGROUND -->
+<div class="bg"></div>
 
-  <div class="hero-shell">
-    <div class="hero-main">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-art" id="heroArt">
-        <img src="box-front.webp" alt="3rd Eye Quest game artwork" />
-      </div>
-    </div>
+<!-- OVERLAY -->
+<div class="overlay"></div>
 
-    <aside class="hero-panel">
-      <div class="panel-card">
-        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" width="64" height="64" />
-        <div class="eyebrow">Remote Viewing Card Game</div>
+<!-- MAIN CENTER -->
+<div class="center">
+  <h1>3RD EYE QUEST</h1>
+</div>
 
-        <h1 class="hero-title">3rd Eye Quest</h1>
+<!-- RIGHT PANEL -->
+<div class="panel">
+  <div class="title">3rd Eye Quest</div>
+  <div class="subtitle">Unlock your intuition. Probe the truth.</div>
 
-        <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
-
-        <p class="subtag">
-          <strong>A Remote Viewing game</strong> disguised as a party card game,
-          built to help players train signal over noise in fast, structured rounds.
-        </p>
-
-        <nav class="panel-nav" aria-label="Main">
-          <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-          <a href="#how" class="btn-secondary">How to Play</a>
-          <a href="#email" class="btn-secondary">Join for Updates</a>
-          <a href="#community" class="btn-secondary">Community Sessions</a>
-        </nav>
-
-        <div class="panel-divider"></div>
-
-        <p class="micro-copy">Fast rounds • Group play • Remote viewing fundamentals</p>
-
-        <div class="badges">
-          <div class="badge">Describe, don’t define</div>
-          <div class="badge">Signal over noise</div>
-          <div class="badge">Reveal + reward</div>
-        </div>
-
-        <div class="panel-footer">
-          Step into the signal and explore the game.
-        </div>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<section class="info" id="about">
-  <h2 class="section-title">What It Is</h2>
-  <p class="section-sub">
-    3rd Eye Quest turns real remote viewing principles into a fun, repeatable game night format.
-    No pressure. No “psychic performance.” Just structured rounds that train perception.
-  </p>
-
-  <div class="cards3">
-    <div class="feature">
-      <h3>What you do</h3>
-      <p>Close eyes, relax, and write quick impressions: texture, shape, emotion, movement, temperature.</p>
-    </div>
-    <div class="feature">
-      <h3>What you’re training</h3>
-      <p>First-signal accuracy, sensory vocabulary, and discipline, the building blocks of remote viewing.</p>
-    </div>
-    <div class="feature">
-      <h3>Why it’s addictive</h3>
-      <p>Instant feedback. Friendly competition. And you get better the more you play.</p>
-    </div>
-  </div>
-</section>
-
-<section class="how" id="how">
-  <h2 class="section-title">How to Play</h2>
-  <p class="section-sub">Three steps. Fast rounds. Big “wait… how did you know that?” moments.</p>
-
-  <div class="step">
-    <h3>1. The Judge selects a target</h3>
-    <p>
-      One player secretly draws a card (Landscape, Animal, Color, or Object) and keeps the image hidden.
-      Everyone else becomes a Viewer.
-    </p>
-  </div>
-
-  <div class="step">
-    <h3>2. Viewers sense the unseen</h3>
-    <p>
-      Viewers close their eyes, breathe, and record impressions. <strong>Describe</strong> instead of guessing.
-      Use the <strong>Digital Assist Guide</strong> to probe for texture, shape, mood, and movement.
-    </p>
-  </div>
-
-  <div class="step">
-    <h3>3. Reveal + reward</h3>
-    <p>
-      The Judge reveals the card. The closest description wins the round and keeps the card.
-      The most consistent player becomes the <strong>Master Viewer</strong>.
-    </p>
-  </div>
-
-  <p class="quote">"Describe, don’t define. Trust your first signal."</p>
-
-  <div class="how-cta">
-    <a href="assist.html" class="btn-primary">Open Assist Guide</a>
-  </div>
-</section>
-
-<section class="gallery" id="cards">
-  <h2 class="section-title">See the Cards</h2>
-  <p class="section-sub">
-    A peek at real targets from the deck. Swipe or scroll to browse.
-  </p>
-
-  <div class="card-carousel" aria-label="3rd Eye Quest card carousel">
-    <div class="carousel-track" id="carouselTrack"></div>
-  </div>
-</section>
-
-<section class="community" id="community">
-  <h2 class="section-title">Community Sessions</h2>
-  <p class="section-sub">
-    Real players. Real impressions. No perfection required.
-    We celebrate signal, messy, surprising, intuitive signal.
-  </p>
-
-  <a href="YOUR-GOOGLE-FORM-LINK" class="btn-primary">
-    Submit Your Session
-  </a>
-
-  <p class="micro-copy" style="text-align:center;">
-    You can use your real name or an alias. All levels welcome.
-  </p>
-</section>
-
-<section class="email-section" id="email">
-  <div class="email-card">
-    <h2 class="section-title" style="margin-bottom:10px;">Join the Email List</h2>
-    <p class="section-sub" style="margin-bottom:10px;">
-      Launch updates, restock drops, bonus rules, and new training add-ons.
-    </p>
-
-    <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007bd8e3f0"
-          method="post"
-          target="_self"
-          novalidate>
-
-      <div class="mc-row">
-        <input type="email"
-               name="EMAIL"
-               id="mce-EMAIL"
-               required
-               placeholder="Enter your email"
-               autocomplete="email" />
-        <button type="submit" name="subscribe">Notify Me</button>
-      </div>
-
-      <div aria-hidden="true" style="position:absolute; left:-5000px;">
-        <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
-      </div>
-
-      <div class="fineprint">No spam. Just the good stuff.</div>
-    </form>
-  </div>
-</section>
-
-<footer>
-  © <span id="year"></span> 3rd Eye Quest • All rights reserved
-</footer>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Gentle artwork parallax
-const hero = document.getElementById("hero");
-const heroArt = document.getElementById("heroArt");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-if (hero && heroArt && !prefersReducedMotion.matches) {
-  hero.addEventListener("mousemove", (e) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    const moveX = x * 14;
-    const moveY = y * 14;
-
-    heroArt.style.transform = `translate(${moveX}px, ${moveY}px)`;
-  });
-
-  hero.addEventListener("mouseleave", () => {
-    heroArt.style.transform = "translate(0px, 0px)";
-  });
-}
-
-// Card carousel
-const cardFiles = [
-  "000.png",
-  "003.png",
-  "006.png",
-  "010.png",
-  "067.png",
-  "068.png",
-  "069.png",
-  "070.png",
-  "083.png",
-  "084.png",
-  "085.png",
-  "087.png",
-  "122.png",
-  "123.png",
-  "124.png",
-  "125.png"
-];
-
-function buildCarousel(){
-  const track = document.getElementById("carouselTrack");
-  if(!track) return;
-
-  track.innerHTML = "";
-  cardFiles.forEach(file => {
-    const card = document.createElement("div");
-    card.className = "carousel-card";
-
-    const img = document.createElement("img");
-    img.src = "cards/" + file;
-    img.alt = "3rd Eye Quest Card";
-    img.loading = "lazy";
-
-    card.appendChild(img);
-    track.appendChild(card);
-  });
-}
-
-buildCarousel();
-</script>
+  <a href="assist.html" class="btn">Assist Guide</a>
+  <a href="#how" class="btn">How to Play</a>
+  <a href="#updates" class="btn">Join Updates</a>
+  <a href="#community" class="btn">Community Sessions</a>
+</div>
 
 </body>
 </html>
