@@ -27,12 +27,77 @@ body {
   overflow: hidden;
 }
 
+  /* FLOATING PLANETS */
+.planets {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.28), rgba(255,255,255,0.04) 45%, rgba(255,255,255,0) 70%);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    inset 0 0 22px rgba(255,255,255,0.04),
+    0 0 28px rgba(255,255,255,0.05);
+  opacity: 0.22;
+  animation: driftPlanet ease-in-out infinite;
+}
+
+.planet::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.05);
+  filter: blur(0.5px);
+}
+
+.planet.small {
+  width: 44px;
+  height: 44px;
+  animation-duration: 28s;
+}
+
+.planet.medium {
+  width: 72px;
+  height: 72px;
+  animation-duration: 40s;
+}
+
+.planet.large {
+  width: 110px;
+  height: 110px;
+  animation-duration: 52s;
+}
+
+@keyframes driftPlanet {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(8px, -10px, 0); }
+  50%  { transform: translate3d(-6px, -18px, 0); }
+  75%  { transform: translate3d(10px, -8px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planet {
+    animation: none !important;
+  }
+}
 /* BACKGROUND IMAGE */
 .bg {
   position: fixed;
   inset: 0;
-  background: url('background.png') center/cover no-repeat;
+  background:
+    url('space-bg.png') center center / auto 100% no-repeat;
+  background-color: #090d18;
   z-index: -2;
+
 }
 
 /* DARK GRADIENT OVERLAY (for readability) */
@@ -119,6 +184,14 @@ body {
   text-shadow: 0 0 30px rgba(0,0,0,0.6);
 }
 
+  .overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0.12), rgba(0,0,0,0.58));
+  z-index: -1;
+}
+  
 /* MOBILE */
 @media (max-width: 768px) {
 
@@ -166,5 +239,15 @@ body {
   <a href="#community" class="btn">Community Sessions</a>
 </div>
 
+  <div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="planets" aria-hidden="true">
+  <div class="planet small" style="top: 14%; left: 10%;"></div>
+  <div class="planet medium" style="top: 22%; left: 68%;"></div>
+  <div class="planet large" style="top: 62%; left: 14%;"></div>
+  <div class="planet small" style="top: 74%; left: 58%;"></div>
+  <div class="planet medium" style="top: 48%; left: 82%;"></div>
+</div>
 </body>
 </html>
