@@ -12,7 +12,6 @@
 <meta property="og:description" content="A remote viewing game disguised as a party card game — train signal over noise in fast, structured rounds." />
 <meta property="og:image" content="box-front.png" />
 
-<!-- Mailchimp Connected Site Script -->
 <script id="mcjs">
 !function(c,h,i,m,p){
   m=c.createElement(h),
@@ -30,13 +29,13 @@
   --quest-card:#2b2d42;
   --quest-text:#edf2f4;
   --quest-gold:#c4a484;
+  --quest-panel:rgba(11,15,29,0.68);
+  --quest-panel-border:rgba(237,242,244,0.10);
 }
 
 *{ box-sizing:border-box; }
 
-html{
-  scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
@@ -68,7 +67,7 @@ a{ color:inherit; }
   background:transparent;
   color:var(--quest-pink);
   border:2px solid var(--quest-pink);
-  padding:14px 34px;
+  padding:14px 24px;
   border-radius:999px;
   text-decoration:none;
   font-weight:800;
@@ -94,7 +93,6 @@ a{ color:inherit; }
   font-weight:700;
   display:inline-block;
   transition:all 0.25s ease;
-  margin-left:10px;
 }
 
 .btn-secondary:hover{
@@ -106,18 +104,13 @@ a{ color:inherit; }
 .hero{
   position:relative;
   min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-  padding:80px 6vw;
   overflow:hidden;
   isolation:isolate;
   background:
-    radial-gradient(900px 600px at 20% 25%, rgba(157,129,137,0.18) 0%, rgba(157,129,137,0) 60%),
-    radial-gradient(800px 500px at 80% 30%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 65%),
-    radial-gradient(900px 700px at 65% 80%, rgba(120,90,255,0.08) 0%, rgba(120,90,255,0) 70%),
-    linear-gradient(180deg, #111528 0%, #0b0f1d 100%);
+    radial-gradient(900px 600px at 18% 20%, rgba(157,129,137,0.15) 0%, rgba(157,129,137,0) 60%),
+    radial-gradient(800px 500px at 82% 26%, rgba(196,164,132,0.10) 0%, rgba(196,164,132,0) 62%),
+    radial-gradient(900px 700px at 55% 78%, rgba(74,84,180,0.18) 0%, rgba(74,84,180,0) 72%),
+    linear-gradient(180deg, #0d1122 0%, #090d18 100%);
 }
 
 .hero::before{
@@ -125,33 +118,126 @@ a{ color:inherit; }
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02), rgba(255,255,255,0) 60%);
+    linear-gradient(90deg, rgba(5,8,18,0.25) 0%, rgba(5,8,18,0.06) 40%, rgba(5,8,18,0.0) 100%);
   pointer-events:none;
   z-index:0;
 }
 
-.hero-left{
+.hero-shell{
   position:relative;
-  max-width:560px;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 360px;
+  align-items:center;
+  gap:24px;
+  padding:28px 28px 28px 40px;
+  z-index:1;
+}
+
+.star-field{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+.star{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.9);
+  box-shadow:0 0 8px rgba(255,255,255,0.30);
+  opacity:0.5;
+  animation:floatStar linear infinite;
+}
+
+.star.small{
+  width:2px;
+  height:2px;
+  opacity:0.35;
+}
+
+.star.medium{
+  width:4px;
+  height:4px;
+  opacity:0.55;
+}
+
+.star.large{
+  width:6px;
+  height:6px;
+  opacity:0.28;
+}
+
+@keyframes floatStar{
+  0%{ transform:translateY(0px); }
+  50%{ transform:translateY(-18px); }
+  100%{ transform:translateY(0px); }
+}
+
+.hero-main{
+  position:relative;
+  min-height:80vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+
+.hero-glow{
+  position:absolute;
+  width:min(700px, 58vw);
+  height:min(700px, 58vw);
+  border-radius:50%;
+  background:
+    radial-gradient(circle, rgba(157,129,137,0.17) 0%, rgba(157,129,137,0.07) 34%, rgba(157,129,137,0) 72%);
+  filter:blur(24px);
+  pointer-events:none;
+}
+
+.hero-art{
+  position:relative;
+  width:min(620px, 52vw);
+  max-width:100%;
+  transition:transform 0.18s ease-out;
+  will-change:transform;
+}
+
+.hero-art img{
+  width:100%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.45));
+}
+
+.hero-panel{
+  position:relative;
   z-index:2;
+  align-self:stretch;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.panel-card{
+  width:100%;
+  max-width:360px;
+  background:var(--quest-panel);
+  border:1px solid var(--quest-panel-border);
+  border-radius:28px;
+  padding:24px 22px;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 24px 70px rgba(0,0,0,0.30);
   text-align:left;
 }
 
 .logo-img{
-  width:70px;
+  width:64px;
   height:auto;
   margin-bottom:16px;
-  filter:drop-shadow(0 0 10px rgba(157,129,137,0.30));
-}
-
-.glass-card{
-  background:rgba(17,21,40,0.52);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:24px;
-  padding:30px;
-  box-shadow:0 24px 60px rgba(0,0,0,0.32);
+  filter:drop-shadow(0 0 10px rgba(157,129,137,0.28));
 }
 
 .eyebrow{
@@ -164,60 +250,64 @@ a{ color:inherit; }
   color:#dbe2ee;
   text-transform:uppercase;
   letter-spacing:0.14em;
-  font-size:0.72rem;
+  font-size:0.70rem;
   font-weight:800;
   margin-bottom:18px;
 }
 
-h1{
-  font-size:clamp(2.5rem, 6vw, 5rem);
+.hero-title{
+  font-size:clamp(2.4rem, 4vw, 4rem);
   color:var(--quest-pink);
-  margin:0 0 12px;
+  margin:0 0 10px;
   letter-spacing:0.08em;
   text-transform:uppercase;
-  line-height:0.92;
-  text-shadow:0 0 18px rgba(157,129,137,0.18);
-  text-align:left;
+  line-height:0.93;
+  text-shadow:0 0 16px rgba(157,129,137,0.16);
 }
 
 .tagline{
-  font-size:1.18rem;
+  font-size:1.1rem;
   color:#d6deea;
   margin:0 0 12px;
   font-style:italic;
-  max-width:42ch;
-  text-align:left;
+  line-height:1.35;
 }
 
 .subtag{
-  font-size:1rem;
+  font-size:0.98rem;
   color:#b7c4d7;
   margin:0 0 24px;
-  max-width:56ch;
   line-height:1.7;
-  text-align:left;
 }
 
 .subtag strong{
   color:var(--quest-gold);
 }
 
-.hero-actions{
+.panel-nav{
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
   gap:12px;
-  align-items:center;
+  margin-bottom:18px;
 }
 
-.hero-actions .btn-secondary{
-  margin-left:0;
+.panel-nav .btn-primary,
+.panel-nav .btn-secondary{
+  width:100%;
+  text-align:center;
+}
+
+.panel-divider{
+  height:1px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.14), rgba(255,255,255,0.0));
+  margin:18px 0;
 }
 
 .micro-copy{
-  margin-top:16px;
   font-size:0.92rem;
   color:#a7b4c8;
-  text-align:left;
+  margin:0 0 14px;
+  line-height:1.6;
 }
 
 .badges{
@@ -225,7 +315,6 @@ h1{
   gap:10px;
   flex-wrap:wrap;
   justify-content:flex-start;
-  margin-top:16px;
 }
 
 .badge{
@@ -234,85 +323,14 @@ h1{
   padding:8px 12px;
   border-radius:999px;
   color:#d5dcea;
-  font-size:0.85rem;
+  font-size:0.82rem;
 }
 
-.hero-art-wrap{
-  position:relative;
-  flex:1;
-  min-width:320px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:2;
-}
-
-.hero-art-glow{
-  position:absolute;
-  width:520px;
-  height:520px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle, rgba(157,129,137,0.18) 0%, rgba(157,129,137,0.06) 35%, rgba(157,129,137,0) 72%);
-  filter:blur(20px);
-  pointer-events:none;
-}
-
-.hero-art{
-  position:relative;
-  width:min(500px, 42vw);
-  max-width:100%;
-  transition:transform 0.18s ease-out;
-  will-change:transform;
-}
-
-.hero-art img{
-  width:100%;
-  height:auto;
-  display:block;
-  filter:drop-shadow(0 26px 50px rgba(0,0,0,0.48));
-}
-
-.star-field{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-}
-
-.star{
-  position:absolute;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.9);
-  box-shadow:0 0 8px rgba(255,255,255,0.35);
-  opacity:0.55;
-  animation:floatStar linear infinite;
-}
-
-.star.small{
-  width:2px;
-  height:2px;
-  opacity:0.4;
-}
-
-.star.medium{
-  width:4px;
-  height:4px;
-  opacity:0.55;
-}
-
-.star.large{
-  width:6px;
-  height:6px;
-  opacity:0.35;
-}
-
-@keyframes floatStar{
-  0%{ transform:translateY(0px); }
-  50%{ transform:translateY(-18px); }
-  100%{ transform:translateY(0px); }
+.panel-footer{
+  margin-top:18px;
+  color:#8d99ae;
+  font-size:0.82rem;
+  line-height:1.6;
 }
 
 /* INFO */
@@ -554,85 +572,58 @@ footer{
 
 /* MOBILE */
 @media (max-width: 980px){
-  .hero{
-    flex-direction:column;
-    justify-content:center;
-    text-align:center;
-    padding:72px 20px 56px;
-    gap:28px;
+  .hero-shell{
+    grid-template-columns:1fr;
+    gap:20px;
+    padding:20px 20px 36px;
   }
 
-  .hero-left{
-    max-width:100%;
-    text-align:left;
+  .hero-main{
+    min-height:auto;
+    padding-top:30px;
+    order:1;
   }
 
-  .hero-art-wrap{
-    width:100%;
+  .hero-panel{
+    order:2;
+  }
+
+  .panel-card{
+    max-width:none;
   }
 
   .hero-art{
-    width:min(420px, 84vw);
+    width:min(460px, 82vw);
   }
 
-  .hero-art-glow{
-    width:360px;
-    height:360px;
+  .hero-glow{
+    width:min(520px, 82vw);
+    height:min(520px, 82vw);
   }
 }
 
 @media (max-width: 700px){
-  .glass-card{
-    padding:22px 18px;
-  }
-
-  h1{
-    font-size:clamp(2.2rem, 12vw, 3.9rem);
+  .hero-title{
+    font-size:clamp(2.2rem, 11vw, 3.6rem);
   }
 
   .tagline{
-    font-size:1.05rem;
+    font-size:1.02rem;
   }
 
   .subtag{
-    font-size:0.97rem;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .hero-actions .btn-primary,
-  .hero-actions .btn-secondary{
-    width:100%;
-    text-align:center;
-  }
-
-  .badges{
-    justify-content:flex-start;
+    font-size:0.96rem;
   }
 }
 
-@media (max-width: 420px){
-  .logo-img{
-    width:58px;
-  }
-}
-
-/* Motion accessibility */
 @media (prefers-reduced-motion: reduce){
-  html{
-    scroll-behavior:auto;
-  }
-
+  html{ scroll-behavior:auto; }
+  .hero-art,
   .btn-primary,
   .btn-secondary,
-  .carousel-card img,
-  .hero-art{
+  .carousel-card img{
     transition:none;
   }
-
   .star{
     animation:none !important;
   }
@@ -644,94 +635,64 @@ footer{
 
 <section class="hero" id="hero">
   <div class="star-field" aria-hidden="true">
-    <div class="star small" style="top:14%; left:12%; animation-duration:16s;"></div>
-    <div class="star medium" style="top:24%; left:32%; animation-duration:20s;"></div>
-    <div class="star small" style="top:40%; left:8%; animation-duration:24s;"></div>
-    <div class="star large" style="top:62%; left:20%; animation-duration:28s;"></div>
-    <div class="star small" style="top:78%; left:36%; animation-duration:22s;"></div>
-    <div class="star medium" style="top:18%; right:18%; animation-duration:26s;"></div>
-    <div class="star small" style="top:30%; right:8%; animation-duration:18s;"></div>
-    <div class="star medium" style="top:55%; right:16%; animation-duration:23s;"></div>
-    <div class="star small" style="top:75%; right:10%; animation-duration:19s;"></div>
-    <div class="star large" style="top:84%; right:26%; animation-duration:30s;"></div>
+    <div class="star small" style="top:8%; left:8%; animation-duration:14s;"></div>
+    <div class="star medium" style="top:16%; left:24%; animation-duration:20s;"></div>
+    <div class="star small" style="top:34%; left:12%; animation-duration:18s;"></div>
+    <div class="star large" style="top:62%; left:20%; animation-duration:26s;"></div>
+    <div class="star small" style="top:82%; left:10%; animation-duration:17s;"></div>
+    <div class="star medium" style="top:10%; left:56%; animation-duration:24s;"></div>
+    <div class="star small" style="top:26%; left:68%; animation-duration:19s;"></div>
+    <div class="star medium" style="top:58%; left:72%; animation-duration:23s;"></div>
+    <div class="star small" style="top:80%; left:64%; animation-duration:18s;"></div>
+    <div class="star large" style="top:18%; right:18%; animation-duration:28s;"></div>
+    <div class="star small" style="top:34%; right:10%; animation-duration:16s;"></div>
+    <div class="star medium" style="top:74%; right:18%; animation-duration:21s;"></div>
   </div>
 
-  <div class="hero-left">
-    <div class="glass-card">
-      <div class="hero-left">
-  <div class="glass-card">
-    <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" width="70" height="70" />
-    <div class="eyebrow">Remote Viewing Card Game</div>
-
-    <h1>3rd Eye Quest</h1>
-
-    <p class="tagline">
-      Unlock your intuition. Probe the truth. Master the quest.
-    </p>
-
-    <p class="subtag">
-      <strong>A Remote Viewing game</strong> disguised as a party card game —
-      train signal over noise in fast, structured rounds.
-    </p>
-
-    <div class="hero-actions">
-      <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-      <a href="#how" class="btn-secondary">How to Play</a>
-    </div>
-
-    <div class="micro-copy">
-      Fast rounds • Group play • Remote viewing fundamentals
-    </div>
-
-    <div class="badges">
-      <div class="badge">Describe, don’t define</div>
-      <div class="badge">Signal over noise</div>
-      <div class="badge">Reveal + reward</div>
-    </div>
-  </div>
-</div>
-
-<div class="hero-art-wrap">
-  <div class="hero-art-glow" aria-hidden="true"></div>
-  <div class="hero-art" id="heroArt">
-    <img src="box-front.webp" alt="3rd Eye Quest front artwork" />
-  </div>
-</div>
-      <div class="eyebrow">Remote Viewing Card Game</div>
-
-      <h1>3rd Eye Quest</h1>
-
-      <p class="tagline">
-        Unlock your intuition. Probe the truth. Master the quest.
-      </p>
-
-      <p class="subtag">
-        <strong>A Remote Viewing game</strong> disguised as a party card game —
-        train signal over noise in fast, structured rounds.
-      </p>
-
-      <div class="hero-actions">
-        <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
-        <a href="#how" class="btn-secondary">How to Play</a>
-      </div>
-
-      <div class="micro-copy">
-        Fast rounds • Group play • Remote viewing fundamentals
-      </div>
-
-      <div class="badges">
-        <div class="badge">Describe, don’t define</div>
-        <div class="badge">Signal over noise</div>
-        <div class="badge">Reveal + reward</div>
+  <div class="hero-shell">
+    <div class="hero-main">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-art" id="heroArt">
+        <img src="box-front.webp" alt="3rd Eye Quest game artwork" />
       </div>
     </div>
-  </div>
 
-  <div class="hero-art-wrap">
-    <div class="hero-art-glow" aria-hidden="true"></div>
-    <div class="hero-art" id="heroArt">
-      <img src="box-front.webp" alt="3rd Eye Quest front artwork" />
-    </div>
+    <aside class="hero-panel">
+      <div class="panel-card">
+        <img src="logo.png" alt="3rd Eye Quest Logo" class="logo-img" width="64" height="64" />
+        <div class="eyebrow">Remote Viewing Card Game</div>
+
+        <h1 class="hero-title">3rd Eye Quest</h1>
+
+        <p class="tagline">Unlock your intuition. Probe the truth. Master the quest.</p>
+
+        <p class="subtag">
+          <strong>A Remote Viewing game</strong> disguised as a party card game,
+          built to help players train signal over noise in fast, structured rounds.
+        </p>
+
+        <nav class="panel-nav" aria-label="Main">
+          <a href="assist.html" class="btn-primary">Open Player Assist Guide</a>
+          <a href="#how" class="btn-secondary">How to Play</a>
+          <a href="#email" class="btn-secondary">Join for Updates</a>
+          <a href="#community" class="btn-secondary">Community Sessions</a>
+        </nav>
+
+        <div class="panel-divider"></div>
+
+        <p class="micro-copy">Fast rounds • Group play • Remote viewing fundamentals</p>
+
+        <div class="badges">
+          <div class="badge">Describe, don’t define</div>
+          <div class="badge">Signal over noise</div>
+          <div class="badge">Reveal + reward</div>
+        </div>
+
+        <div class="panel-footer">
+          Step into the signal and explore the game.
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -800,9 +761,7 @@ footer{
   </p>
 
   <div class="card-carousel" aria-label="3rd Eye Quest card carousel">
-    <div class="carousel-track" id="carouselTrack">
-      <!-- JS populates -->
-    </div>
+    <div class="carousel-track" id="carouselTrack"></div>
   </div>
 </section>
 
@@ -858,70 +817,70 @@ footer{
 </footer>
 
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Hero artwork parallax
-  const hero = document.getElementById("hero");
-  const heroArt = document.getElementById("heroArt");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+// Gentle artwork parallax
+const hero = document.getElementById("hero");
+const heroArt = document.getElementById("heroArt");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (hero && heroArt && !prefersReducedMotion.matches) {
-    hero.addEventListener("mousemove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+if (hero && heroArt && !prefersReducedMotion.matches) {
+  hero.addEventListener("mousemove", (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-      const moveX = x * 18;
-      const moveY = y * 18;
+    const moveX = x * 14;
+    const moveY = y * 14;
 
-      heroArt.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
+    heroArt.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
 
-    hero.addEventListener("mouseleave", () => {
-      heroArt.style.transform = "translate(0px, 0px)";
-    });
-  }
+  hero.addEventListener("mouseleave", () => {
+    heroArt.style.transform = "translate(0px, 0px)";
+  });
+}
 
-  // Card Carousel
-  const cardFiles = [
-    "000.png",
-    "003.png",
-    "006.png",
-    "010.png",
-    "067.png",
-    "068.png",
-    "069.png",
-    "070.png",
-    "083.png",
-    "084.png",
-    "085.png",
-    "087.png",
-    "122.png",
-    "123.png",
-    "124.png",
-    "125.png"
-  ];
+// Card carousel
+const cardFiles = [
+  "000.png",
+  "003.png",
+  "006.png",
+  "010.png",
+  "067.png",
+  "068.png",
+  "069.png",
+  "070.png",
+  "083.png",
+  "084.png",
+  "085.png",
+  "087.png",
+  "122.png",
+  "123.png",
+  "124.png",
+  "125.png"
+];
 
-  function buildCarousel(){
-    const track = document.getElementById("carouselTrack");
-    if(!track) return;
+function buildCarousel(){
+  const track = document.getElementById("carouselTrack");
+  if(!track) return;
 
-    track.innerHTML = "";
-    cardFiles.forEach(file => {
-      const card = document.createElement("div");
-      card.className = "carousel-card";
+  track.innerHTML = "";
+  cardFiles.forEach(file => {
+    const card = document.createElement("div");
+    card.className = "carousel-card";
 
-      const img = document.createElement("img");
-      img.src = "cards/" + file;
-      img.alt = "3rd Eye Quest Card";
-      img.loading = "lazy";
+    const img = document.createElement("img");
+    img.src = "cards/" + file;
+    img.alt = "3rd Eye Quest Card";
+    img.loading = "lazy";
 
-      card.appendChild(img);
-      track.appendChild(card);
-    });
-  }
+    card.appendChild(img);
+    track.appendChild(card);
+  });
+}
 
-  buildCarousel();
+buildCarousel();
 </script>
 
 </body>
