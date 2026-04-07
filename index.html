@@ -32,9 +32,22 @@ body {
 .bg {
   position: fixed;
   inset: 0;
-  background: url('background.png') center center / contain no-repeat;
-  background-color: #090d18;
+  background: url('space-bg.png') center 20% / cover no-repeat;
   z-index: -3;
+}
+
+}
+  .bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.5) 40%,
+    rgba(0,0,0,0.2) 60%,
+    rgba(0,0,0,0.8) 100%
+  );
 }
 
 /* FLOATING PLANETS */
