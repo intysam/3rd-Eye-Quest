@@ -50,6 +50,14 @@ body {
   );
 }
 
+  .bg {
+  position: fixed;
+  inset: 0;
+  background: url('background.png') center 20% / cover no-repeat;
+  z-index: -3;
+  animation: bgDrift 60s ease-in-out infinite alternate;
+}
+  
 /* FLOATING PLANETS */
 .planets {
   position: fixed;
@@ -109,6 +117,34 @@ body {
   100% { transform: translate(0px, 0px); }
 }
 
+  @keyframes bgDrift {
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  100% {
+    transform: scale(1.05) translate(-10px, -10px);
+  }
+}
+
+  @keyframes twinkle {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+  
+  .stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 70% 60%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 40% 80%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.5), transparent);
+  animation: twinkle 6s infinite ease-in-out alternate;
+  opacity: 0.4;
+}
+  
 @media (prefers-reduced-motion: reduce) {
   .planet {
     animation: none !important;
@@ -256,6 +292,9 @@ body {
   <div class="planet small" style="top: 74%; left: 58%; animation-delay: -15s;"></div>
   <div class="planet medium" style="top: 48%; left: 82%; animation-delay: -20s;"></div>
 </div>
+
+  <div class="bg"></div>
+<div class="stars"></div>
   
 </body>
 </html>
