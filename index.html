@@ -10,7 +10,6 @@
 :root {
   --glass: rgba(20, 20, 35, 0.55);
   --text: #f5f5f5;
-  --accent: #c4a484;
 }
 
 /* RESET */
@@ -28,16 +27,17 @@ body {
   background-color: #090d18;
 }
 
-/* BACKGROUND IMAGE */
+/* BACKGROUND */
 .bg {
   position: fixed;
   inset: 0;
   background: url('background.png') center 20% / cover no-repeat;
   z-index: -3;
+  animation: bgDrift 60s ease-in-out infinite alternate;
 }
 
-}
-  .bg::after {
+/* GRADIENT OVERLAY */
+.bg::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -50,88 +50,8 @@ body {
   );
 }
 
-  .bg {
-  position: fixed;
-  inset: 0;
-  background: url('background.png') center 20% / cover no-repeat;
-  z-index: -3;
-  animation: bgDrift 60s ease-in-out infinite alternate;
-}
-  
-/* FLOATING PLANETS */
-.planets {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -2;
-  overflow: hidden;
-}
-
-.planet {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 0 24px rgba(255,255,255,0.12);
-}
-
-.planet.small {
-  width: 44px;
-  height: 44px;
-  animation: drift1 8s ease-in-out infinite;
-}
-
-.planet.medium {
-  width: 72px;
-  height: 72px;
-  animation: drift2 10s ease-in-out infinite;
-}
-
-.planet.large {
-  width: 110px;
-  height: 110px;
-  animation: drift3 12s ease-in-out infinite;
-}
-
-@keyframes drift1 {
-  0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(20px, -16px); }
-  50%  { transform: translate(-14px, -30px); }
-  75%  { transform: translate(22px, -8px); }
-  100% { transform: translate(0px, 0px); }
-}
-
-@keyframes drift2 {
-  0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(-22px, 10px); }
-  50%  { transform: translate(-30px, -20px); }
-  75%  { transform: translate(14px, -24px); }
-  100% { transform: translate(0px, 0px); }
-}
-
-@keyframes drift3 {
-  0%   { transform: translate(0px, 0px); }
-  20%  { transform: translate(18px, -12px); }
-  50%  { transform: translate(28px, 14px); }
-  80%  { transform: translate(-16px, -24px); }
-  100% { transform: translate(0px, 0px); }
-}
-
-  @keyframes bgDrift {
-  0% {
-    transform: scale(1) translate(0px, 0px);
-  }
-  100% {
-    transform: scale(1.05) translate(-10px, -10px);
-  }
-}
-
-  @keyframes twinkle {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.6; }
-}
-  
-  .stars {
+/* STAR TWINKLE */
+.stars {
   position: fixed;
   inset: 0;
   z-index: -2;
@@ -144,23 +64,16 @@ body {
   animation: twinkle 6s infinite ease-in-out alternate;
   opacity: 0.4;
 }
-  
-@media (prefers-reduced-motion: reduce) {
-  .planet {
-    animation: none !important;
-  }
-}
-  
-/* DARK GRADIENT OVERLAY */
+
+/* OVERLAY */
 .overlay {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(0,0,0,0.12), rgba(0,0,0,0.58));
+  background: radial-gradient(circle at center, rgba(0,0,0,0.12), rgba(0,0,0,0.58));
   z-index: -1;
 }
 
-/* RIGHT SIDE PANEL */
+/* RIGHT PANEL */
 .panel {
   position: absolute;
   right: 0;
@@ -177,7 +90,7 @@ body {
   border-left: 1px solid rgba(255,255,255,0.08);
 }
 
-/* TITLE */
+/* TEXT */
 .title {
   font-size: 30px;
   font-weight: 600;
@@ -206,7 +119,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* CENTER AREA */
+/* CENTER */
 .center {
   position: absolute;
   left: 0;
@@ -216,16 +129,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
-/* MAIN TITLE FLOAT */
+/* TITLE */
 .center h1 {
   font-size: 54px;
   letter-spacing: 6px;
-  opacity: 0.9;
-  text-align: center;
   text-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* ANIMATIONS */
+@keyframes bgDrift {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(-10px, -10px); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.6; }
 }
 
 /* MOBILE */
@@ -237,7 +158,6 @@ body {
     top: auto;
     flex-direction: row;
     overflow-x: auto;
-    padding: 20px;
   }
 
   .center {
@@ -248,27 +168,13 @@ body {
     font-size: 34px;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .planet {
-    animation: none !important;
-  }
-}
 </style>
 </head>
 
 <body>
 
 <div class="bg"></div>
-
-<div class="planets" aria-hidden="true">
-  <div class="planet small" style="top: 14%; left: 10%;"></div>
-  <div class="planet medium" style="top: 22%; left: 68%;"></div>
-  <div class="planet large" style="top: 62%; left: 14%;"></div>
-  <div class="planet small" style="top: 74%; left: 58%;"></div>
-  <div class="planet medium" style="top: 48%; left: 82%;"></div>
-</div>
-
+<div class="stars"></div>
 <div class="overlay"></div>
 
 <div class="center">
@@ -280,21 +186,10 @@ body {
   <div class="subtitle">Unlock your intuition. Probe the truth.</div>
 
   <a href="assist.html" class="btn">Assist Guide</a>
-  <a href="#how" class="btn">How to Play</a>
-  <a href="#updates" class="btn">Join Updates</a>
-  <a href="#community" class="btn">Community Sessions</a>
+  <a href="#" class="btn">How to Play</a>
+  <a href="#" class="btn">Join Updates</a>
+  <a href="#" class="btn">Community Sessions</a>
 </div>
 
-<div class="planets" aria-hidden="true">
-  <div class="planet small" style="top: 14%; left: 10%; animation-delay: -3s;"></div>
-  <div class="planet medium" style="top: 22%; left: 68%; animation-delay: -11s;"></div>
-  <div class="planet large" style="top: 62%; left: 14%; animation-delay: -7s;"></div>
-  <div class="planet small" style="top: 74%; left: 58%; animation-delay: -15s;"></div>
-  <div class="planet medium" style="top: 48%; left: 82%; animation-delay: -20s;"></div>
-</div>
-
-  <div class="bg"></div>
-<div class="stars"></div>
-  
 </body>
 </html>
