@@ -280,6 +280,11 @@ body {
   .info-panel {
     width: 100%;
   }
+
+  .info-panel {
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
 }
 </style>
 </head>
@@ -306,59 +311,50 @@ body {
 
 <div class="modal-backdrop" id="modalBackdrop"></div>
 
-<aside class="info-panel" id="howPanel">
-  <button class="close-btn" data-close>&times;</button>
-  <h2>How to Play</h2>
-  <p>3rd Eye Quest is a fast, intuitive remote viewing game designed for groups, classrooms, and curious explorers.</p>
-
-  <ol>
-    <li><strong>Select a Judge.</strong> The Judge secretly draws a target card and keeps it hidden.</li>
-    <li><strong>Viewers describe impressions.</strong> Players write textures, shapes, colors, emotions, movement, and sensory clues.</li>
-    <li><strong>Reveal the target.</strong> The Judge compares the sessions to the card image.</li>
-    <li><strong>Choose the closest match.</strong> The winning Viewer keeps the card.</li>
-  </ol>
-
-  <p>The golden rule: describe, don’t define. Let the first signal speak before the mind starts decorating it.</p>
-  <a href="assist.html" class="panel-link">Open Assist Guide</a>
-</aside>
-
-<aside class="info-panel" id="updatesPanel">
-  <button class="close-btn" data-close>&times;</button>
-  <h2>Join Updates</h2>
-  <p>Get launch updates, restock notices, bonus rules, community prompts, and new training add-ons.</p>
-
-  <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007bd8e3f0"
-        method="post"
-        target="_self"
-        novalidate>
-    <input class="email-box" type="email" name="EMAIL" placeholder="Enter your email" required>
-    <button class="btn" type="submit">Notify Me</button>
-
-    <div aria-hidden="true" style="position:absolute; left:-5000px;">
-      <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
-    </div>
-  </form>
-</aside>
-
 <aside class="info-panel" id="communityPanel">
   <button class="close-btn" data-close>&times;</button>
-  <h2>Community Sessions</h2>
-  <p>Share your remote viewing sessions, sketches, and impressions from 3rd Eye Quest rounds.</p>
 
-  <ul>
-    <li>Beginner sessions are welcome.</li>
-    <li>You can use your real name or an alias.</li>
-    <li>Messy impressions are part of the signal journey.</li>
-  </ul>
+  <h2>Enter the Signal</h2>
+  <p>Share your impressions, sketches, and perception.</p>
 
-  <p>
-  Share your impressions, sketches, and signal. No perfection required.
-</p>
-<a href="https://tally.so/r/ja0PbR" class="panel-link" target="_blank">
-  Enter the Signal
-</a>
+  <iframe 
+    data-tally-src="https://tally.so/embed/ja0PbR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+    loading="lazy"
+    width="100%" 
+    height="600"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title="3rd Eye Quest Session Submission"
+    style="border-radius: 12px; margin-top: 20px;">
+  </iframe>
+
+  <script>
+    var d = document,
+    w = "https://tally.so/widgets/embed.js",
+    v = function () {
+      if (typeof Tally !== "undefined") {
+        Tally.loadEmbeds();
+      } else {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+          e.src = e.dataset.tallySrc;
+        });
+      }
+    };
+    if (typeof Tally !== "undefined") {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = v;
+      d.body.appendChild(s);
+    }
+  </script>
 </aside>
 
+  <script src="https://tally.so/widgets/embed.js"></script>
+  
 <script>
 const backdrop = document.getElementById("modalBackdrop");
 const panels = {
