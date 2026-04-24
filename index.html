@@ -9,10 +9,11 @@
 <style>
 :root {
   --glass: rgba(20, 20, 35, 0.55);
+  --panel: rgba(14, 17, 32, 0.82);
   --text: #f5f5f5;
+  --accent: #c4a484;
 }
 
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -36,7 +37,6 @@ body {
   animation: bgDrift 60s ease-in-out infinite alternate;
 }
 
-/* GRADIENT OVERLAY */
 .bg::after {
   content: "";
   position: absolute;
@@ -50,7 +50,6 @@ body {
   );
 }
 
-/* STAR TWINKLE */
 .stars {
   position: fixed;
   inset: 0;
@@ -65,7 +64,6 @@ body {
   opacity: 0.4;
 }
 
-/* OVERLAY */
 .overlay {
   position: fixed;
   inset: 0;
@@ -73,7 +71,26 @@ body {
   z-index: -1;
 }
 
-/* RIGHT PANEL */
+/* CENTER TITLE */
+.center {
+  position: absolute;
+  left: 0;
+  right: 320px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center h1 {
+  font-size: 54px;
+  letter-spacing: 6px;
+  text-align: center;
+  text-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* RIGHT MENU */
 .panel {
   position: absolute;
   right: 0;
@@ -88,9 +105,9 @@ body {
   justify-content: center;
   gap: 20px;
   border-left: 1px solid rgba(255,255,255,0.08);
+  z-index: 5;
 }
 
-/* TEXT */
 .title {
   font-size: 30px;
   font-weight: 600;
@@ -103,7 +120,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* BUTTONS */
 .btn {
   padding: 14px;
   border-radius: 999px;
@@ -111,6 +127,9 @@ body {
   text-decoration: none;
   color: white;
   border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
   transition: all 0.3s ease;
 }
 
@@ -119,26 +138,105 @@ body {
   transform: translateY(-2px);
 }
 
-/* CENTER */
-.center {
-  position: absolute;
-  left: 0;
-  right: 320px;
+/* POPUP SYSTEM */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.42);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.info-panel {
+  position: fixed;
   top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  right: 0;
+  width: min(520px, 92vw);
+  height: 100vh;
+  background: var(--panel);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255,255,255,0.12);
+  box-shadow: -30px 0 80px rgba(0,0,0,0.42);
+  padding: 42px 34px;
+  transform: translateX(105%);
+  transition: transform 0.38s ease;
+  z-index: 11;
+  overflow-y: auto;
 }
 
-/* TITLE */
-.center h1 {
-  font-size: 54px;
-  letter-spacing: 6px;
-  text-shadow: 0 0 30px rgba(0,0,0,0.6);
+.info-panel.active {
+  transform: translateX(0);
 }
 
-/* ANIMATIONS */
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.info-panel h2 {
+  color: var(--accent);
+  font-size: 28px;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.info-panel p {
+  line-height: 1.7;
+  opacity: 0.88;
+  margin-bottom: 18px;
+}
+
+.info-panel ol,
+.info-panel ul {
+  padding-left: 22px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.info-panel li {
+  margin-bottom: 10px;
+}
+
+.panel-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 12px 18px;
+}
+
+.email-box {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  margin: 10px 0;
+}
+
+.email-box::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
 @keyframes bgDrift {
   0% { transform: scale(1) translate(0, 0); }
   100% { transform: scale(1.05) translate(-10px, -10px); }
@@ -158,14 +256,29 @@ body {
     top: auto;
     flex-direction: row;
     overflow-x: auto;
+    padding: 20px;
+  }
+
+  .title,
+  .subtitle {
+    display: none;
+  }
+
+  .btn {
+    min-width: 145px;
   }
 
   .center {
     right: 0;
+    bottom: 130px;
   }
 
   .center h1 {
     font-size: 34px;
+  }
+
+  .info-panel {
+    width: 100%;
   }
 }
 </style>
@@ -173,15 +286,107 @@ body {
 
 <body>
 
+<div class="bg"></div>
+<div class="stars"></div>
+<div class="overlay"></div>
+
+<div class="center">
+  <h1>3RD EYE QUEST</h1>
+</div>
+
 <div class="panel">
   <div class="title">3rd Eye Quest</div>
   <div class="subtitle">Unlock your intuition. Probe the truth.</div>
 
   <a href="assist.html" class="btn">Assist Guide</a>
-  <a href="how-to-play.html" class="btn">How to Play</a>
-  <a href="updates.html" class="btn">Join Updates</a>
-  <a href="community.html" class="btn">Community Sessions</a>
+  <button class="btn" data-panel="how">How to Play</button>
+  <button class="btn" data-panel="updates">Join Updates</button>
+  <button class="btn" data-panel="community">Community Sessions</button>
 </div>
+
+<div class="modal-backdrop" id="modalBackdrop"></div>
+
+<aside class="info-panel" id="howPanel">
+  <button class="close-btn" data-close>&times;</button>
+  <h2>How to Play</h2>
+  <p>3rd Eye Quest is a fast, intuitive remote viewing game designed for groups, classrooms, and curious explorers.</p>
+
+  <ol>
+    <li><strong>Select a Judge.</strong> The Judge secretly draws a target card and keeps it hidden.</li>
+    <li><strong>Viewers describe impressions.</strong> Players write textures, shapes, colors, emotions, movement, and sensory clues.</li>
+    <li><strong>Reveal the target.</strong> The Judge compares the sessions to the card image.</li>
+    <li><strong>Choose the closest match.</strong> The winning Viewer keeps the card.</li>
+  </ol>
+
+  <p>The golden rule: describe, don’t define. Let the first signal speak before the mind starts decorating it.</p>
+  <a href="assist.html" class="panel-link">Open Assist Guide</a>
+</aside>
+
+<aside class="info-panel" id="updatesPanel">
+  <button class="close-btn" data-close>&times;</button>
+  <h2>Join Updates</h2>
+  <p>Get launch updates, restock notices, bonus rules, community prompts, and new training add-ons.</p>
+
+  <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007bd8e3f0"
+        method="post"
+        target="_self"
+        novalidate>
+    <input class="email-box" type="email" name="EMAIL" placeholder="Enter your email" required>
+    <button class="btn" type="submit">Notify Me</button>
+
+    <div aria-hidden="true" style="position:absolute; left:-5000px;">
+      <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
+    </div>
+  </form>
+</aside>
+
+<aside class="info-panel" id="communityPanel">
+  <button class="close-btn" data-close>&times;</button>
+  <h2>Community Sessions</h2>
+  <p>Share your remote viewing sessions, sketches, and impressions from 3rd Eye Quest rounds.</p>
+
+  <ul>
+    <li>Beginner sessions are welcome.</li>
+    <li>You can use your real name or an alias.</li>
+    <li>Messy impressions are part of the signal journey.</li>
+  </ul>
+
+  <a href="YOUR-GOOGLE-FORM-LINK" class="panel-link">Submit Your Session</a>
+</aside>
+
+<script>
+const backdrop = document.getElementById("modalBackdrop");
+const panels = {
+  how: document.getElementById("howPanel"),
+  updates: document.getElementById("updatesPanel"),
+  community: document.getElementById("communityPanel")
+};
+
+function closePanels() {
+  Object.values(panels).forEach(panel => panel.classList.remove("active"));
+  backdrop.classList.remove("active");
+}
+
+function openPanel(name) {
+  closePanels();
+  panels[name].classList.add("active");
+  backdrop.classList.add("active");
+}
+
+document.querySelectorAll("[data-panel]").forEach(button => {
+  button.addEventListener("click", () => openPanel(button.dataset.panel));
+});
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", closePanels);
+});
+
+backdrop.addEventListener("click", closePanels);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closePanels();
+});
+</script>
 
 </body>
 </html>
