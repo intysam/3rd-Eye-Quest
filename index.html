@@ -277,52 +277,73 @@ body {
   }
 }
 
-  .card-preview {
+.card-preview {
   position: absolute;
-  left: 32px;
-  bottom: 32px;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
   z-index: 4;
-  width: min(560px, calc(100vw - 380px));
+  width: calc(100% - 360px);
+  max-width: 1000px;
 }
 
 .card-preview-title {
+  text-align: center;
   font-size: 13px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.75;
-  margin-bottom: 12px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+/* SCROLL CONTAINER */
+.card-strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 16px;
+  border-radius: 22px;
+
+  background: rgba(20,20,35,0.45);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.10);
+
+  scroll-behavior: smooth;
+}
+
+/* HIDE SCROLLBAR (clean look) */
+.card-strip::-webkit-scrollbar {
+  display: none;
 }
 
 .card-strip {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(20,20,35,0.35);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
+/* CARDS */
 .card-strip img {
-  width: 82px;
-  height: 120px;
+  width: 90px;
+  height: 130px;
   object-fit: contain;
   border-radius: 10px;
-  background: rgba(0,0,0,0.25);
   flex: 0 0 auto;
+
+  background: rgba(0,0,0,0.25);
+
   transition: transform 0.25s ease;
 }
 
 .card-strip img:hover {
-  transform: translateY(-4px) scale(1.04);
+  transform: translateY(-6px) scale(1.05);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .card-preview {
     display: none;
   }
 }
+  
 </style>
 </head>
 
@@ -349,16 +370,27 @@ body {
   <div class="card-preview">
   <div class="card-preview-title">Preview the Deck</div>
 
+<div class="card-preview">
+  <div class="card-preview-title">Explore the Deck</div>
+
   <div class="card-strip">
-    <img src="cards/000.png" alt="3rd Eye Quest card preview">
-    <img src="cards/003.png" alt="3rd Eye Quest card preview">
-    <img src="cards/006.png" alt="3rd Eye Quest card preview">
-    <img src="cards/010.png" alt="3rd Eye Quest card preview">
-    <img src="cards/067.png" alt="3rd Eye Quest card preview">
-    <img src="cards/083.png" alt="3rd Eye Quest card preview">
+    <img src="cards/000.png">
+    <img src="cards/001.png">
+    <img src="cards/002.png">
+    <img src="cards/003.png">
+    <img src="cards/004.png">
+    <img src="cards/005.png">
+    <img src="cards/006.png">
+    <img src="cards/007.png">
+    <img src="cards/008.png">
+    <img src="cards/009.png">
+    <img src="cards/010.png">
+    <img src="cards/011.png">
+    <img src="cards/012.png">
+    <!-- keep going with all your cards -->
   </div>
 </div>
-  
+    
 <div class="modal-backdrop" id="modalBackdrop"></div>
 
 <aside class="info-panel" id="howPanel">
