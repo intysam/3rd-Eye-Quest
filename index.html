@@ -276,6 +276,53 @@ body {
     width: 100%;
   }
 }
+
+  .card-preview {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+  z-index: 4;
+  width: min(560px, calc(100vw - 380px));
+}
+
+.card-preview-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+
+.card-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(20,20,35,0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.card-strip img {
+  width: 82px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.25);
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
+
+.card-strip img:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+@media (max-width: 768px) {
+  .card-preview {
+    display: none;
+  }
+}
 </style>
 </head>
 
@@ -299,6 +346,19 @@ body {
   <button class="btn" type="button" data-panel="community">Community Sessions</button>
 </div>
 
+  <div class="card-preview">
+  <div class="card-preview-title">Preview the Deck</div>
+
+  <div class="card-strip">
+    <img src="cards/000.png" alt="3rd Eye Quest card preview">
+    <img src="cards/003.png" alt="3rd Eye Quest card preview">
+    <img src="cards/006.png" alt="3rd Eye Quest card preview">
+    <img src="cards/010.png" alt="3rd Eye Quest card preview">
+    <img src="cards/067.png" alt="3rd Eye Quest card preview">
+    <img src="cards/083.png" alt="3rd Eye Quest card preview">
+  </div>
+</div>
+  
 <div class="modal-backdrop" id="modalBackdrop"></div>
 
 <aside class="info-panel" id="howPanel">
