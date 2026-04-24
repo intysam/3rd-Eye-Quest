@@ -1,1 +1,96 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | 3rd Eye Quest</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height:100vh;
+  font-family:system-ui, -apple-system, sans-serif;
+  color:white;
+  background:#090d18;
+  overflow:hidden;
+}
+
+.bg {
+  position:fixed;
+  inset:0;
+  background:url('background.png') center 20% / cover no-repeat;
+  z-index:-2;
+}
+
+.bg::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.62);
+}
+
+.wrap {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.card {
+  width:min(620px, 92vw);
+  background:rgba(20,20,35,0.68);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:28px;
+  padding:42px 34px;
+  text-align:center;
+  backdrop-filter:blur(16px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.35);
+}
+
+h1 {
+  font-size:clamp(2.3rem, 7vw, 4rem);
+  letter-spacing:4px;
+  margin-bottom:16px;
+}
+
+p {
+  opacity:0.85;
+  line-height:1.7;
+  margin-bottom:28px;
+}
+
+.btn {
+  display:inline-block;
+  padding:14px 24px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.28);
+  color:white;
+  text-decoration:none;
+  transition:0.25s ease;
+}
+
+.btn:hover {
+  background:rgba(255,255,255,0.12);
+}
+</style>
+</head>
+
+<body>
+<div class="bg"></div>
+
+<main class="wrap">
+  <div class="card">
+    <h1>YOU’RE IN</h1>
+    <p>
+      Thank you for joining the 3rd Eye Quest list.
+      Updates, launch notes, and signal-friendly goodies will find their way to you soon.
+    </p>
+    <a href="index.html" class="btn">Return to Website</a>
+  </div>
+</main>
+
+</body>
+</html>
