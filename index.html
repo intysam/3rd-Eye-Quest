@@ -9,7 +9,7 @@
 <style>
 :root {
   --glass: rgba(20, 20, 35, 0.55);
-  --panel: rgba(14, 17, 32, 0.82);
+  --panel: rgba(14, 17, 32, 0.86);
   --text: #f5f5f5;
   --accent: #c4a484;
 }
@@ -28,7 +28,6 @@ body {
   background-color: #090d18;
 }
 
-/* BACKGROUND */
 .bg {
   position: fixed;
   inset: 0;
@@ -71,7 +70,6 @@ body {
   z-index: -1;
 }
 
-/* CENTER TITLE */
 .center {
   position: absolute;
   left: 0;
@@ -90,7 +88,6 @@ body {
   text-shadow: 0 0 30px rgba(0,0,0,0.6);
 }
 
-/* RIGHT MENU */
 .panel {
   position: absolute;
   right: 0;
@@ -138,7 +135,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* POPUP SYSTEM */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -158,13 +154,13 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  width: min(520px, 92vw);
+  width: min(560px, 92vw);
   height: 100vh;
   background: var(--panel);
   backdrop-filter: blur(20px);
   border-left: 1px solid rgba(255,255,255,0.12);
   box-shadow: -30px 0 80px rgba(0,0,0,0.42);
-  padding: 42px 34px;
+  padding: 42px 34px 70px;
   transform: translateX(105%);
   transition: transform 0.38s ease;
   z-index: 11;
@@ -191,7 +187,7 @@ body {
 
 .info-panel h2 {
   color: var(--accent);
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 14px;
   letter-spacing: 1px;
 }
@@ -247,7 +243,6 @@ body {
   100% { opacity: 0.6; }
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .panel {
     width: 100%;
@@ -280,11 +275,6 @@ body {
   .info-panel {
     width: 100%;
   }
-
-  .info-panel {
-  overflow-y: auto;
-  padding-bottom: 60px;
-}
 }
 </style>
 </head>
@@ -304,12 +294,56 @@ body {
   <div class="subtitle">Unlock your intuition. Probe the truth.</div>
 
   <a href="assist.html" class="btn">Assist Guide</a>
-  <button class="btn" data-panel="how">How to Play</button>
-  <button class="btn" data-panel="updates">Join Updates</button>
-  <button class="btn" data-panel="community">Community Sessions</button>
+  <button class="btn" type="button" data-panel="how">How to Play</button>
+  <button class="btn" type="button" data-panel="updates">Join Updates</button>
+  <button class="btn" type="button" data-panel="community">Community Sessions</button>
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop"></div>
+
+<aside class="info-panel" id="howPanel">
+  <button class="close-btn" data-close>&times;</button>
+
+  <h2>How to Play</h2>
+  <p>3rd Eye Quest is a fast, intuitive remote viewing game designed for groups, curious explorers, and anyone ready to train perception through play.</p>
+
+  <ol>
+    <li><strong>Select a Judge.</strong> The Judge secretly draws a target card and keeps the image hidden.</li>
+    <li><strong>Viewers sense the unseen.</strong> Players write impressions: textures, shapes, colors, emotions, movement, temperature, and sensory clues.</li>
+    <li><strong>Reveal the target.</strong> The Judge compares each session to the card image.</li>
+    <li><strong>Choose the closest match.</strong> The winning Viewer keeps the card.</li>
+  </ol>
+
+  <p><strong>Golden rule:</strong> Describe, don’t define. Trust the first signal before the mind starts decorating it.</p>
+
+  <a href="assist.html" class="panel-link">Open Assist Guide</a>
+</aside>
+
+<aside class="info-panel" id="updatesPanel">
+  <button class="close-btn" data-close>&times;</button>
+
+  <h2>Join Updates</h2>
+  <p>Get launch updates, restock notices, bonus rules, and new training add-ons.</p>
+
+  <form action="https://3rdeyequest.us3.list-manage.com/subscribe/post?u=a00d9ac7897706f6ee8f12932&amp;id=284f5f52c3&amp;f_id=007bd8e3f0"
+        method="post"
+        target="_self"
+        novalidate>
+
+    <input class="email-box"
+           type="email"
+           name="EMAIL"
+           placeholder="Enter your email"
+           autocomplete="email"
+           required>
+
+    <button class="btn" type="submit">Notify Me</button>
+
+    <div aria-hidden="true" style="position:absolute; left:-5000px;">
+      <input type="text" name="b_a00d9ac7897706f6ee8f12932_284f5f52c3" tabindex="-1" value="">
+    </div>
+  </form>
+</aside>
 
 <aside class="info-panel" id="communityPanel">
   <button class="close-btn" data-close>&times;</button>
@@ -321,42 +355,20 @@ body {
     data-tally-src="https://tally.so/embed/ja0PbR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
     loading="lazy"
     width="100%" 
-    height="600"
+    height="650"
     frameborder="0"
     marginheight="0"
     marginwidth="0"
     title="3rd Eye Quest Session Submission"
     style="border-radius: 12px; margin-top: 20px;">
   </iframe>
-
-  <script>
-    var d = document,
-    w = "https://tally.so/widgets/embed.js",
-    v = function () {
-      if (typeof Tally !== "undefined") {
-        Tally.loadEmbeds();
-      } else {
-        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
-          e.src = e.dataset.tallySrc;
-        });
-      }
-    };
-    if (typeof Tally !== "undefined") {
-      v();
-    } else if (d.querySelector('script[src="' + w + '"]') == null) {
-      var s = d.createElement("script");
-      s.src = w;
-      s.onload = v;
-      s.onerror = v;
-      d.body.appendChild(s);
-    }
-  </script>
 </aside>
 
-  <script src="https://tally.so/widgets/embed.js"></script>
-  
+<script src="https://tally.so/widgets/embed.js"></script>
+
 <script>
 const backdrop = document.getElementById("modalBackdrop");
+
 const panels = {
   how: document.getElementById("howPanel"),
   updates: document.getElementById("updatesPanel"),
@@ -364,25 +376,39 @@ const panels = {
 };
 
 function closePanels() {
-  Object.values(panels).forEach(panel => panel.classList.remove("active"));
-  backdrop.classList.remove("active");
+  Object.values(panels).forEach(panel => {
+    if (panel) panel.classList.remove("active");
+  });
+
+  if (backdrop) backdrop.classList.remove("active");
 }
 
 function openPanel(name) {
   closePanels();
-  panels[name].classList.add("active");
-  backdrop.classList.add("active");
+
+  if (panels[name]) {
+    panels[name].classList.add("active");
+    if (backdrop) backdrop.classList.add("active");
+
+    if (window.Tally) {
+      Tally.loadEmbeds();
+    }
+  }
 }
 
 document.querySelectorAll("[data-panel]").forEach(button => {
-  button.addEventListener("click", () => openPanel(button.dataset.panel));
+  button.addEventListener("click", () => {
+    openPanel(button.dataset.panel);
+  });
 });
 
 document.querySelectorAll("[data-close]").forEach(button => {
   button.addEventListener("click", closePanels);
 });
 
-backdrop.addEventListener("click", closePanels);
+if (backdrop) {
+  backdrop.addEventListener("click", closePanels);
+}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closePanels();
