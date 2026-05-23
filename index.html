@@ -91,12 +91,11 @@ body {
 /* CARD PREVIEW */
 .card-preview {
   position: absolute;
-  left: 50%;
-  bottom: 24px;
-  transform: translateX(-50%);
-  z-index: 3;
-  width: calc(100% - 380px);
-  max-width: 1000px;
+  left: 0;
+  right: 320px;
+  bottom: 12px;
+  z-index: 4;
+  padding: 0 28px;
   text-align: center;
 }
 
@@ -104,15 +103,21 @@ body {
   font-size: 13px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.8;
-  margin-bottom: 10px;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.card-preview-inner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .card-strip {
   display: flex;
   gap: 14px;
   overflow-x: auto;
-  padding: 14px;
+  padding: 14px 54px;
   border-radius: 22px;
   background: rgba(20,20,35,0.42);
   backdrop-filter: blur(14px);
@@ -121,27 +126,50 @@ body {
 }
 
 .card-strip::-webkit-scrollbar {
-  display: none;
+  height: 6px;
 }
 
-.card-strip {
-  scrollbar-width: none;
+.card-strip::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
 }
 
 .card-strip img {
-  width: 88px;
-  height: 128px;
+  width: 82px;
+  height: 118px;
   object-fit: contain;
   border-radius: 10px;
   flex: 0 0 auto;
   background: rgba(0,0,0,0.22);
-  transition: transform 0.25s ease;
 }
 
-.card-strip img:hover {
-  transform: translateY(-6px) scale(1.05);
+.deck-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(10,10,20,0.75);
+  color: white;
+  cursor: pointer;
 }
 
+.deck-arrow.left {
+  left: 10px;
+}
+
+.deck-arrow.right {
+  right: 10px;
+}
+
+@media (max-width: 900px) {
+  .card-preview {
+    display: none;
+  }
+}
 /* RIGHT MENU */
 .panel {
   position: absolute;
@@ -355,24 +383,34 @@ body {
 <div class="card-preview">
   <div class="card-preview-title">Scan the Deck</div>
 
-  <div class="card-strip">
-    <img src="cards/000.png" alt="3rd Eye Quest card preview">
-    <img src="cards/003.png" alt="3rd Eye Quest card preview">
-    <img src="cards/006.png" alt="3rd Eye Quest card preview">
-    <img src="cards/010.png" alt="3rd Eye Quest card preview">
-    <img src="cards/067.png" alt="3rd Eye Quest card preview">
-    <img src="cards/068.png" alt="3rd Eye Quest card preview">
-    <img src="cards/069.png" alt="3rd Eye Quest card preview">
-    <img src="cards/070.png" alt="3rd Eye Quest card preview">
-    <img src="cards/083.png" alt="3rd Eye Quest card preview">
-    <img src="cards/084.png" alt="3rd Eye Quest card preview">
-    <img src="cards/085.png" alt="3rd Eye Quest card preview">
-    <img src="cards/087.png" alt="3rd Eye Quest card preview">
-    <img src="cards/122.png" alt="3rd Eye Quest card preview">
-    <img src="cards/123.png" alt="3rd Eye Quest card preview">
-    <img src="cards/124.png" alt="3rd Eye Quest card preview">
-    <img src="cards/125.png" alt="3rd Eye Quest card preview">
+<div class="card-preview">
+  <div class="card-preview-title">Scan the Deck</div>
+
+  <div class="card-preview-inner">
+    <button class="deck-arrow left" type="button" id="deckLeft">‹</button>
+
+    <div class="card-strip" id="cardStrip">
+      <img src="cards/000.png" alt="3rd Eye Quest card preview">
+      <img src="cards/003.png" alt="3rd Eye Quest card preview">
+      <img src="cards/006.png" alt="3rd Eye Quest card preview">
+      <img src="cards/010.png" alt="3rd Eye Quest card preview">
+      <img src="cards/067.png" alt="3rd Eye Quest card preview">
+      <img src="cards/068.png" alt="3rd Eye Quest card preview">
+      <img src="cards/069.png" alt="3rd Eye Quest card preview">
+      <img src="cards/070.png" alt="3rd Eye Quest card preview">
+      <img src="cards/083.png" alt="3rd Eye Quest card preview">
+      <img src="cards/084.png" alt="3rd Eye Quest card preview">
+      <img src="cards/085.png" alt="3rd Eye Quest card preview">
+      <img src="cards/087.png" alt="3rd Eye Quest card preview">
+      <img src="cards/122.png" alt="3rd Eye Quest card preview">
+      <img src="cards/123.png" alt="3rd Eye Quest card preview">
+      <img src="cards/124.png" alt="3rd Eye Quest card preview">
+      <img src="cards/125.png" alt="3rd Eye Quest card preview">
+    </div>
+
+    <button class="deck-arrow right" type="button" id="deckRight">›</button>
   </div>
+
 </div>
 
 <div class="panel">
@@ -482,6 +520,20 @@ function openPanel(name) {
   }
 }
 
+  const cardStrip = document.getElementById("cardStrip");
+const deckLeft = document.getElementById("deckLeft");
+const deckRight = document.getElementById("deckRight");
+
+if (cardStrip && deckLeft && deckRight) {
+  deckLeft.addEventListener("click", () => {
+    cardStrip.scrollBy({ left: -320, behavior: "smooth" });
+  });
+
+  deckRight.addEventListener("click", () => {
+    cardStrip.scrollBy({ left: 320, behavior: "smooth" });
+  });
+}
+  
 document.querySelectorAll("[data-panel]").forEach(button => {
   button.addEventListener("click", () => {
     openPanel(button.dataset.panel);
