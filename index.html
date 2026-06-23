@@ -328,21 +328,32 @@ body {
 }
 
 /* MOBILE */
-@media (max-width: 900px) {
-  .card-preview {
-    display: none;
-  }
-}
-
 @media (max-width: 768px) {
   .panel {
     width: 100%;
     height: auto;
     bottom: 0;
     top: auto;
+    right: 0;
+
     flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+
     overflow-x: auto;
-    padding: 20px;
+    overflow-y: hidden;
+
+    padding: 18px 24px 28px;
+    scroll-padding-left: 24px;
+    scroll-padding-right: 24px;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .panel::before,
+  .panel::after {
+    content: "";
+    flex: 0 0 6px;
   }
 
   .title,
@@ -351,21 +362,25 @@ body {
   }
 
   .btn {
-    min-width: 145px;
+    min-width: 160px;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
   .center {
     right: 0;
-    bottom: 130px;
+    bottom: 120px;
   }
 
   .center h1 {
     font-size: 34px;
+    letter-spacing: 4px;
   }
 
   .info-panel {
     width: 100%;
   }
+}
 }
 </style>
 </head>
